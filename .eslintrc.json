@@ -5,10 +5,10 @@
     "jest": true
   },
   "extends": [
-    "airbnb",
-    "airbnb-typescript",
     "react-app",
     "react-app/jest",
+    "airbnb",
+    "airbnb-typescript",
     "plugin:import/typescript",
     "plugin:prettier/recommended"
   ],
@@ -21,13 +21,22 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": ["react", "@typescript-eslint", "simple-import-sort", "prettier"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "simple-import-sort",
+    "chakra-ui",
+    "prettier"
+  ],
   "rules": {
     "react/react-in-jsx-scope": 0,
     "no-shadow": 0,
     "react/jsx-uses-react": 0,
     "react/jsx-props-no-spreading": 0,
     "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error"
+    "simple-import-sort/exports": "error",
+    "chakra-ui/props-order": "error",
+    "chakra-ui/props-shorthand": "error",
+    "chakra-ui/require-specific-component": "error"
   }
 }
