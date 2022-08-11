@@ -25,7 +25,7 @@
   },
   "posts": [
     {
-      "text": "Sample text",
+      "text": "Sample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample text",
       "image": "",
       "author": {
         "firstName": "John",
@@ -71,6 +71,71 @@
     }
   ],
   "comments": [
+    {
+      "text": "Sample text",
+      "author": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e67eee88c4e18439a05"
+      },
+      "post": "62d5702374ff67dbab62d429",
+      "createdAt": "2022-07-18T14:41:31.747Z",
+      "updatedAt": "2022-07-18T14:41:31.747Z",
+      "id": "62d5711bc1d92a7faf9794d2"
+    },
+    {
+      "text": "Sample text",
+      "author": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e67eee88c4e18439a05"
+      },
+      "post": "62d5702374ff67dbab62d429",
+      "createdAt": "2022-07-18T14:41:31.747Z",
+      "updatedAt": "2022-07-18T14:41:31.747Z",
+      "id": "62d5711bc1d92a7faf9794d2"
+    },
+    {
+      "text": "Sample text",
+      "author": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e67eee88c4e18439a05"
+      },
+      "post": "62d5702374ff67dbab62d429",
+      "createdAt": "2022-07-18T14:41:31.747Z",
+      "updatedAt": "2022-07-18T14:41:31.747Z",
+      "id": "62d5711bc1d92a7faf9794d2"
+    },
+    {
+      "text": "Sample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample text",
+      "author": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e67eee88c4e18439a05"
+      },
+      "post": "62d5702374ff67dbab62d429",
+      "createdAt": "2022-07-18T14:41:31.747Z",
+      "updatedAt": "2022-07-18T14:41:31.747Z",
+      "id": "62d5711bc1d92a7faf9794d2"
+    },
+    {
+      "text": "Sample text",
+      "author": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e67eee88c4e18439a05"
+      },
+      "post": "62d5702374ff67dbab62d429",
+      "createdAt": "2022-07-18T14:41:31.747Z",
+      "updatedAt": "2022-07-18T14:41:31.747Z",
+      "id": "62d5711bc1d92a7faf9794d2"
+    },
     {
       "text": "Sample text",
       "author": {
