@@ -6,8 +6,32 @@
     "image": "",
     "friends": [
       {
-        "firstName": "Other John",
-        "lastName": "Other Doe",
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e69eee88c4e18439a08"
+      },
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e69eee88c4e18439a08"
+      },
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e69eee88c4e18439a08"
+      },
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e69eee88c4e18439a08"
+      },
+      {
+        "firstName": "John",
+        "lastName": "Doe",
         "image": "",
         "id": "62bc9e69eee88c4e18439a08"
       }
