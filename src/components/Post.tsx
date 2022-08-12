@@ -28,13 +28,13 @@ type Props = {
 }
 
 function Post({ ...post }: Props) {
-  const { isOpen, onToggle } = useDisclosure()
+  const { isOpen: commentsOpen, onToggle: toggleCommentsOpen } = useDisclosure()
 
   return (
     <Box p={4} pb={1} bg="white" borderRadius="md" shadow="base">
       <Flex gap={2}>
         <Avatar src={post.author.image} />
-        <Box>
+        <div>
           <Text
             mb={-0.5}
             fontSize="15px"
@@ -43,7 +43,7 @@ function Post({ ...post }: Props) {
           <Text color="gray.500" fontSize="13px">
             {moment(post.createdAt).fromNow()}
           </Text>
-        </Box>
+        </div>
       </Flex>
       <Text mt={2}>{post.text}</Text>
       <Flex align="center" justify="space-between">
@@ -59,7 +59,7 @@ function Post({ ...post }: Props) {
           sx={{ userSelect: 'none' }}
           color="gray.500"
           _hover={{ textDecoration: 'underline', cursor: 'pointer' }}
-          onClick={onToggle}
+          onClick={toggleCommentsOpen}
         >
           {post.comments.length} Comments
         </Text>
@@ -81,12 +81,12 @@ function Post({ ...post }: Props) {
             <FaRegCommentAlt />
           </Box>
         }
-        onClick={onToggle}
+        onClick={toggleCommentsOpen}
         variant="ghost"
       >
         Comment
       </Button>
-      {isOpen && <Comments />}
+      {commentsOpen && <Comments />}
     </Box>
   )
 }

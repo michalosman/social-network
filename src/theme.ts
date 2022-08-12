@@ -1,4 +1,5 @@
 import { extendTheme } from '@chakra-ui/react'
+import defaultTheme from '@chakra-ui/theme'
 
 const theme = extendTheme({
   components: {
@@ -14,6 +15,25 @@ const theme = extendTheme({
             },
           },
         },
+      },
+    },
+    Button: {
+      variants: {
+        left: (props: any) => ({
+          ...defaultTheme.components.Button.variants.solid(props),
+          justifyContent: 'flex-start',
+          px: 2,
+        }),
+        gray: (props: any) => ({
+          ...defaultTheme.components.Button.variants.solid(props),
+          backgroundColor: 'gray.200',
+          _hover: {
+            backgroundColor: 'gray.300',
+          },
+          _active: {
+            backgroundColor: 'gray.400',
+          },
+        }),
       },
     },
   },

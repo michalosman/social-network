@@ -8,16 +8,14 @@ const { user } = data
 
 function Feed() {
   return (
-    <Flex direction="column" gap={4}>
-      <Flex p={4} bg="white" borderRadius="md" shadow="base">
-        <Flex gap={2} w="100%">
-          <Avatar src={user.image} hover />
-          <Input
-            placeholder={`What's on your mind, ${user.firstName}?`}
-            type="text"
-            variant="round"
-          />
-        </Flex>
+    <Flex as="main" direction="column" gap={4}>
+      <Flex gap={2} w="100%" p={4} bg="white" borderRadius="md" shadow="base">
+        <Avatar src={user.image} hover />
+        <Input
+          placeholder={`What's on your mind, ${user.firstName}?`}
+          type="text"
+          variant="round"
+        />
       </Flex>
       {posts.map((post) => (
         <Post {...post} key={post.id} />
