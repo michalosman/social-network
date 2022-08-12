@@ -20,7 +20,7 @@ function Contacts() {
         </Text>
         <Scrollbox maxH="230px">
           {user.friendRequests.map((friendRequest) => (
-            <Flex align="center" gap={4} p={2}>
+            <Flex key={friendRequest.id} align="center" gap={4} p={2}>
               <Avatar size="60px" src={friendRequest.image} hover />
               <Flex direction="column" gap={1}>
                 <Link
@@ -53,7 +53,7 @@ function Contacts() {
       </Text>
       <Scrollbox maxH="352px">
         {user.friends.map((friend) => (
-          <MenuButton>
+          <MenuButton key={friend.id}>
             <Avatar size="36px" src={friend.image} />
             <Text
               ml={2}

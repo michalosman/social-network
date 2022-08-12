@@ -9,85 +9,85 @@
         "firstName": "John",
         "lastName": "Doe",
         "image": "",
-        "id": "62bc9e69eee88c4e18439a08"
+        "id": "1"
       },
       {
         "firstName": "John",
         "lastName": "Doe",
         "image": "",
-        "id": "62bc9e69eee88c4e18439a08"
+        "id": "2"
       },
       {
         "firstName": "John",
         "lastName": "Doe",
         "image": "",
-        "id": "62bc9e69eee88c4e18439a08"
+        "id": "3"
       },
       {
         "firstName": "John",
         "lastName": "Doe",
         "image": "",
-        "id": "62bc9e69eee88c4e18439a08"
+        "id": "4"
       },
       {
         "firstName": "John",
         "lastName": "Doe",
         "image": "",
-        "id": "62bc9e69eee88c4e18439a08"
+        "id": "5"
       },
       {
         "firstName": "John",
         "lastName": "Doe",
         "image": "",
-        "id": "62bc9e69eee88c4e18439a08"
+        "id": "6"
       },
       {
         "firstName": "John",
         "lastName": "Doe",
         "image": "",
-        "id": "62bc9e69eee88c4e18439a08"
+        "id": "7"
       },
       {
         "firstName": "John",
         "lastName": "Doe",
         "image": "",
-        "id": "62bc9e69eee88c4e18439a08"
+        "id": "8"
       },
       {
         "firstName": "John",
         "lastName": "Doe",
         "image": "",
-        "id": "62bc9e69eee88c4e18439a08"
+        "id": "9"
       },
       {
         "firstName": "John",
         "lastName": "Doe",
         "image": "",
-        "id": "62bc9e69eee88c4e18439a08"
+        "id": "10"
       },
       {
         "firstName": "John",
         "lastName": "Doe",
         "image": "",
-        "id": "62bc9e69eee88c4e18439a08"
+        "id": "11"
       },
       {
         "firstName": "John",
         "lastName": "Doe",
         "image": "",
-        "id": "62bc9e69eee88c4e18439a08"
+        "id": "12"
       },
       {
         "firstName": "John",
         "lastName": "Doe",
         "image": "",
-        "id": "62bc9e69eee88c4e18439a08"
+        "id": "13"
       },
       {
         "firstName": "John",
         "lastName": "Doe",
         "image": "",
-        "id": "62bc9e69eee88c4e18439a08"
+        "id": "14"
       }
     ],
     "friendRequests": [
@@ -95,37 +95,37 @@
         "firstName": "John",
         "lastName": "Doe",
         "image": "",
-        "id": "62bc9e69eee88c4e18439a08"
+        "id": "15"
       },
       {
         "firstName": "John",
         "lastName": "Doe",
         "image": "",
-        "id": "62bc9e69eee88c4e18439a08"
+        "id": "16"
       },
       {
         "firstName": "John",
         "lastName": "Doe",
         "image": "",
-        "id": "62bc9e69eee88c4e18439a08"
+        "id": "17"
       },
       {
         "firstName": "John",
         "lastName": "Doe",
         "image": "",
-        "id": "62bc9e69eee88c4e18439a08"
+        "id": "18"
       },
       {
         "firstName": "John",
         "lastName": "Doe",
         "image": "",
-        "id": "62bc9e69eee88c4e18439a08"
+        "id": "19"
       },
       {
         "firstName": "John",
         "lastName": "Doe",
         "image": "",
-        "id": "62bc9e69eee88c4e18439a08"
+        "id": "20"
       }
     ],
     "posts": [
@@ -138,6 +138,68 @@
     ],
     "id": "62bc9e67eee88c4e18439a05"
   },
+  "users": [
+    {
+      "id": "1",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john.doe@gmail.com",
+      "image": "",
+      "friends": [],
+      "friendRequests": [],
+      "posts": []
+    },
+    {
+      "id": "2",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john.doe@gmail.com",
+      "image": "",
+      "friends": [],
+      "friendRequests": [],
+      "posts": []
+    },
+    {
+      "id": "3",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john.doe@gmail.com",
+      "image": "",
+      "friends": [],
+      "friendRequests": [],
+      "posts": []
+    },
+    {
+      "id": "4",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john.doe@gmail.com",
+      "image": "",
+      "friends": [],
+      "friendRequests": [],
+      "posts": []
+    },
+    {
+      "id": "5",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john.doe@gmail.com",
+      "image": "",
+      "friends": [],
+      "friendRequests": [],
+      "posts": []
+    },
+    {
+      "id": "6",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john.doe@gmail.com",
+      "image": "",
+      "friends": [],
+      "friendRequests": [],
+      "posts": []
+    }
+  ],
   "posts": [
     {
       "text": "Sample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample text",
@@ -152,7 +214,7 @@
       "comments": ["62d57113c1d92a7faf9794c8", "62d5711bc1d92a7faf9794d2"],
       "createdAt": "2022-08-01T14:37:23.954Z",
       "updatedAt": "2022-07-18T14:41:31.752Z",
-      "id": "62d5702374ff67dbab62d429"
+      "id": "1"
     },
     {
       "text": "Sample text",
@@ -167,7 +229,7 @@
       "comments": ["62d57113c1d92a7faf9794c8", "62d5711bc1d92a7faf9794d2"],
       "createdAt": "2022-07-18T14:37:23.954Z",
       "updatedAt": "2022-07-18T14:41:31.752Z",
-      "id": "62d5702374ff67dbab62d429e"
+      "id": "2"
     },
     {
       "text": "Sample text",
@@ -176,7 +238,7 @@
         "firstName": "John",
         "lastName": "Doe",
         "image": "",
-        "id": "62bc9e67eee88c4e18439a05"
+        "id": "3"
       },
       "likes": [],
       "comments": ["62d57113c1d92a7faf9794c8", "62d5711bc1d92a7faf9794d2"],
@@ -197,7 +259,7 @@
       "post": "62d5702374ff67dbab62d429",
       "createdAt": "2022-07-18T14:41:31.747Z",
       "updatedAt": "2022-07-18T14:41:31.747Z",
-      "id": "62d5711bc1d92a7faf9794d2"
+      "id": "4"
     },
     {
       "text": "Sample text",
@@ -210,7 +272,7 @@
       "post": "62d5702374ff67dbab62d429",
       "createdAt": "2022-07-18T14:41:31.747Z",
       "updatedAt": "2022-07-18T14:41:31.747Z",
-      "id": "62d5711bc1d92a7faf9794d2"
+      "id": "5"
     },
     {
       "text": "Sample text",
@@ -223,7 +285,7 @@
       "post": "62d5702374ff67dbab62d429",
       "createdAt": "2022-07-18T14:41:31.747Z",
       "updatedAt": "2022-07-18T14:41:31.747Z",
-      "id": "62d5711bc1d92a7faf9794d2"
+      "id": "6"
     },
     {
       "text": "Sample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample text",
@@ -236,7 +298,7 @@
       "post": "62d5702374ff67dbab62d429",
       "createdAt": "2022-07-18T14:41:31.747Z",
       "updatedAt": "2022-07-18T14:41:31.747Z",
-      "id": "62d5711bc1d92a7faf9794d2"
+      "id": "7"
     },
     {
       "text": "Sample text",
@@ -249,7 +311,7 @@
       "post": "62d5702374ff67dbab62d429",
       "createdAt": "2022-07-18T14:41:31.747Z",
       "updatedAt": "2022-07-18T14:41:31.747Z",
-      "id": "62d5711bc1d92a7faf9794d2"
+      "id": "8"
     },
     {
       "text": "Sample text",
@@ -262,7 +324,7 @@
       "post": "62d5702374ff67dbab62d429",
       "createdAt": "2022-07-18T14:41:31.747Z",
       "updatedAt": "2022-07-18T14:41:31.747Z",
-      "id": "62d5711bc1d92a7faf9794d2"
+      "id": "9"
     },
     {
       "text": "Sample text",
@@ -275,7 +337,7 @@
       "post": "62d5702374ff67dbab62d429",
       "createdAt": "2022-07-18T14:41:23.863Z",
       "updatedAt": "2022-07-18T14:41:23.863Z",
-      "id": "62d57113c1d92a7faf9794c8"
+      "id": "10"
     }
   ]
 }

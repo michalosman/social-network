@@ -20,7 +20,7 @@ function Feed() {
         </Flex>
       </Flex>
       {posts.map((post) => (
-        <Post {...post} />
+        <Post {...post} key={post.id} />
       ))}
     </Flex>
   )

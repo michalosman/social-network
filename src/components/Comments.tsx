@@ -20,7 +20,7 @@ function Comments() {
       <Scrollbox maxH="350px">
         <Flex direction="column" gap={4} pr={2}>
           {comments.map((comment) => (
-            <Flex>
+            <Flex key={comment.id}>
               <Avatar size="32px" src="" />
               <Box ml={2} px={3} py={2} bg="gray.100" borderRadius="2xl">
                 <Text

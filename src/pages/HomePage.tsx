@@ -13,6 +13,7 @@ function HomePage() {
         justify={{ base: 'center', lg: 'space-between' }}
         maxW="1920px"
         mt="56px"
+        mx="auto"
       >
         <Flex
           flex={1}
