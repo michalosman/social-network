@@ -2,17 +2,17 @@ import { Avatar as ChakraAvatar } from '@chakra-ui/react'
 
 type Props = {
   src: string
-  size?: '28px' | '32px' | '40px' | '168px'
+  hover?: boolean
+  size?: '28px' | '32px' | '36px' | '40px' | '60px' | '168px'
 }
 
-function Avatar({ src, size }: Props) {
+function Avatar({ src, hover, size }: Props) {
   return (
     <ChakraAvatar
-      sx={{ cursor: 'pointer' }}
       w={size}
       h={size}
       bg="gray.300"
-      _hover={{ filter: 'brightness(0.96)' }}
+      _hover={hover ? { filter: 'brightness(0.96)', cursor: 'pointer' } : {}}
       src={src}
     />
   )
@@ -20,6 +20,7 @@ function Avatar({ src, size }: Props) {
 
 Avatar.defaultProps = {
   size: '40px',
+  hover: false,
 }
 
 export default Avatar

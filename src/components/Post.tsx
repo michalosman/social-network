@@ -86,7 +86,7 @@ function Post({ ...post }: Props) {
       >
         Comment
       </Button>
-      {!isOpen && <Comments />}
+      {isOpen && <Comments />}
     </Box>
   )
 }

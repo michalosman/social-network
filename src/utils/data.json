@@ -34,9 +34,100 @@
         "lastName": "Doe",
         "image": "",
         "id": "62bc9e69eee88c4e18439a08"
+      },
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e69eee88c4e18439a08"
+      },
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e69eee88c4e18439a08"
+      },
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e69eee88c4e18439a08"
+      },
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e69eee88c4e18439a08"
+      },
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e69eee88c4e18439a08"
+      },
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e69eee88c4e18439a08"
+      },
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e69eee88c4e18439a08"
+      },
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e69eee88c4e18439a08"
+      },
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e69eee88c4e18439a08"
       }
     ],
-    "friendRequests": [],
+    "friendRequests": [
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e69eee88c4e18439a08"
+      },
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e69eee88c4e18439a08"
+      },
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e69eee88c4e18439a08"
+      },
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e69eee88c4e18439a08"
+      },
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e69eee88c4e18439a08"
+      },
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "image": "",
+        "id": "62bc9e69eee88c4e18439a08"
+      }
+    ],
     "posts": [
       "62d337b2ce44e99e77812130",
       "62d337b2ce44e99e77812134",
