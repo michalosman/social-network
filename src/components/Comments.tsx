@@ -9,10 +9,11 @@ function Comments() {
     <Box mb={4}>
       <Divider mt={1} mb={4} />
       <Flex gap={2} mb={4}>
-        <Avatar size="32px" src="" hover />
+        <Avatar size="32px" src="" />
         <Input
           fontSize="15px"
           placeholder="Write a comment..."
+          size="sm"
           variant="round"
         />
       </Flex>

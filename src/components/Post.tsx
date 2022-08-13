@@ -3,6 +3,7 @@ import {
   Button,
   Divider,
   Flex,
+  Link,
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
@@ -32,14 +33,15 @@ function Post({ ...post }: Props) {
 
   return (
     <Box p={4} pb={1} bg="white" borderRadius="md" shadow="base">
-      <Flex gap={2}>
-        <Avatar src={post.author.image} />
+      <Flex gap={2} role="group">
+        <Avatar src={post.author.image} hover />
         <div>
-          <Text
+          <Link
             mb={-0.5}
             fontSize="15px"
             fontWeight="semibold"
-          >{`${post.author.firstName} ${post.author.lastName}`}</Text>
+            href="/"
+          >{`${post.author.firstName} ${post.author.lastName}`}</Link>
           <Text color="gray.500" fontSize="13px">
             {moment(post.createdAt).fromNow()}
           </Text>
