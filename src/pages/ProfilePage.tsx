@@ -1,13 +1,22 @@
-import { Box, Button, Flex, Image, Text } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Flex,
+  Grid,
+  GridItem,
+  Image,
+  Link,
+  Text,
+} from '@chakra-ui/react'
 import { FaFacebookMessenger, FaUserPlus } from 'react-icons/fa'
 
 import Avatar from '../components/Avatar'
 import Post from '../components/Post'
-import { posts, user } from '../utils/data.json'
+import { posts, user, users } from '../utils/data.json'
 
 function ProfilePage() {
   return (
-    <div>
+    <>
       <Box pb={4} bg="white" shadow="base">
         <Box maxW="1250px" m="auto">
           <Image
@@ -53,12 +62,60 @@ function ProfilePage() {
           </Flex>
         </Box>
       </Box>
-      <Flex direction="column" gap={4} maxW="1250px" m="auto" p={4}>
-        {posts.map((post) => (
-          <Post {...post} key={post.id} />
-        ))}
+      <Flex
+        align="flex-start"
+        direction={{ base: 'column', lg: 'row' }}
+        gap={4}
+        maxW="1250px"
+        m="auto"
+        p={4}
+      >
+        <Flex
+          direction="column"
+          p={4}
+          pt={3}
+          bg="white"
+          borderRadius="md"
+          shadow="base"
+        >
+          <Text fontSize="20px" fontWeight="bold">
+            Friends
+          </Text>
+          <Text
+            color="gray.500"
+            fontSize="17px"
+          >{`${user.friends.length} friends`}</Text>
+          <Grid
+            gap={4}
+            templateColumns="repeat(3, 1fr)"
+            w={{ base: 'none', lg: '490px' }}
+            mt={3}
+          >
+            {users.map((friend) => (
+              <GridItem key={friend.id}>
+                <Image
+                  borderRadius="lg"
+                  _hover={{ cursor: 'pointer', filter: 'brightness(0.9)' }}
+                  fallbackSrc="https://i.pravatar.cc/"
+                  src=""
+                />
+                <Link
+                  mt={1}
+                  fontSize="13px"
+                  fontWeight="semibold"
+                  href="/"
+                >{`${user.firstName} ${user.lastName}`}</Link>
+              </GridItem>
+            ))}
+          </Grid>
+        </Flex>
+        <Flex direction="column" gap={4}>
+          {posts.map((post) => (
+            <Post {...post} key={post.id} />
+          ))}
+        </Flex>
       </Flex>
-    </div>
+    </>
   )
 }
 
