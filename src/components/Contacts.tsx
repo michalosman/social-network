@@ -59,8 +59,8 @@ function Contacts() {
       </Text>
       <Scrollbox maxH="384px">
         {user.friends.map((friend) => (
-          <Link to="profile/1">
-            <Button key={friend.id} w="100%" py={6} variant="left">
+          <Link to="profile/1" key={friend.id}>
+            <Button w="100%" py={6} variant="left">
               <Avatar size="36px" src={friend.image} />
               <Text
                 ml={2}

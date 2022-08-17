@@ -4,11 +4,13 @@ import {
   Divider,
   Flex,
   Image,
-  Input,
   Link,
   Text,
 } from '@chakra-ui/react'
 import { useState } from 'react'
+
+import LoginForm from '../components/LoginForm'
+import SignUpForm from '../components/SignUpForm'
 
 function AuthPage() {
   const [isLogin, setIsLogin] = useState(true)
@@ -47,7 +49,6 @@ function AuthPage() {
           </Text>
         </Flex>
         <Flex
-          align="center"
           direction="column"
           gap={3}
           w="100%"
@@ -59,40 +60,21 @@ function AuthPage() {
           borderRadius="lg"
           shadow="xl"
         >
-          {!isLogin && (
-            <>
-              <Input placeholder="First name" size="lg" />
-              <Input placeholder="Last name" size="lg" />
-            </>
-          )}
-          <Input
-            autoFocus
-            placeholder="Email or phone number"
-            size="lg"
-            type="email"
-          />
-          <Input placeholder="Password" size="lg" type="password" />
-          <Button
-            w="100%"
-            fontSize="20px"
-            fontWeight="bold"
-            colorScheme="messenger"
-            size="lg"
-          >
-            {isLogin ? 'Log In' : 'Sign Up'}
-          </Button>
-          <Link color="#1877F2" fontSize="14px" href="/">
+          {isLogin ? <LoginForm /> : <SignUpForm />}
+          <Link color="#1877F2" fontSize="14px" textAlign="center" href="/">
             Forgot password?
           </Link>
           <Divider mt={2} mb={4} />
-          <Button
-            mb={3}
-            colorScheme="whatsapp"
-            onClick={() => setIsLogin(!isLogin)}
-            size="lg"
-          >
-            {isLogin ? 'Create new account' : 'Log in with your account'}
-          </Button>
+          <Flex justify="center">
+            <Button
+              mb={3}
+              colorScheme="whatsapp"
+              onClick={() => setIsLogin(!isLogin)}
+              size="lg"
+            >
+              {isLogin ? 'Create new account' : 'Log in with your account'}
+            </Button>
+          </Flex>
         </Flex>
       </Flex>
     </Container>

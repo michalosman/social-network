@@ -5,14 +5,14 @@ import {
   Grid,
   GridItem,
   Image,
-  Link,
   Text,
 } from '@chakra-ui/react'
 import { FaFacebookMessenger, FaUserPlus } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
 import Avatar from '../components/Avatar'
 import Post from '../components/Post'
-import Settings from '../components/Settings'
+import Settings from '../components/SettingsModal'
 import { posts, user, users } from '../utils/data.json'
 
 function ProfilePage() {
@@ -100,18 +100,22 @@ function ProfilePage() {
           >
             {users.map((friend) => (
               <GridItem key={friend.id}>
-                <Image
-                  borderRadius="lg"
-                  _hover={{ cursor: 'pointer', filter: 'brightness(0.9)' }}
-                  fallbackSrc="https://i.pravatar.cc/"
-                  src=""
-                />
-                <Link
-                  mt={1}
-                  fontSize="13px"
-                  fontWeight="semibold"
-                  href="/"
-                >{`${user.firstName} ${user.lastName}`}</Link>
+                <Link to="/profile/1">
+                  <Image
+                    borderRadius="lg"
+                    _hover={{ cursor: 'pointer', filter: 'brightness(0.9)' }}
+                    fallbackSrc="https://i.pravatar.cc/"
+                    src=""
+                  />
+                </Link>
+                <Link to="/profile/1">
+                  <Text
+                    mt={1}
+                    fontSize="13px"
+                    fontWeight="semibold"
+                    _hover={{ textDecoration: 'underline' }}
+                  >{`${user.firstName} ${user.lastName}`}</Text>
+                </Link>
               </GridItem>
             ))}
           </Grid>
