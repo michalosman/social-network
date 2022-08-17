@@ -8,8 +8,8 @@ import {
   MenuList,
   Text,
 } from '@chakra-ui/react'
+import { FaUser } from 'react-icons/fa'
 import { ImExit } from 'react-icons/im'
-import { RiSettings5Fill } from 'react-icons/ri'
 
 import data from '../utils/data.json'
 import Avatar from './Avatar'
@@ -53,13 +53,13 @@ function Navbar() {
               px={1}
               borderRadius="md"
               icon={
-                <Box p={1.5} bg="gray.200" rounded="full">
-                  <RiSettings5Fill fontSize="24px" />
+                <Box p={2} bg="gray.200" rounded="full">
+                  <FaUser fontSize="20px" />
                 </Box>
               }
             >
               <Text mb={1} fontWeight="semibold">
-                Settings
+                My profile
               </Text>
             </MenuItem>
             <MenuItem

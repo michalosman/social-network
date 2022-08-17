@@ -7,7 +7,7 @@ import {
   InputLeftElement,
   Text,
 } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
 
 import { users } from '../utils/data.json'
@@ -16,14 +16,11 @@ import Scrollbox from './Scrollbox'
 
 function UserSearch() {
   const [searchedUser, setSearchedUser] = useState('')
-  const [results, setResults] = useState(users)
 
-  useEffect(() => {
+  const results = users.filter((user) => {
     const regex = new RegExp(searchedUser, 'gi')
-    setResults(
-      users.filter((user) => `${user.firstName} ${user.lastName}`.match(regex))
-    )
-  }, [searchedUser])
+    return `${user.firstName} ${user.lastName}`.match(regex)
+  })
 
   return (
     <Box pos="relative">

@@ -12,9 +12,12 @@ import { FaFacebookMessenger, FaUserPlus } from 'react-icons/fa'
 
 import Avatar from '../components/Avatar'
 import Post from '../components/Post'
+import Settings from '../components/Settings'
 import { posts, user, users } from '../utils/data.json'
 
 function ProfilePage() {
+  const isOwnProfile = true
+
   return (
     <>
       <Box pb={4} bg="white" shadow="base">
@@ -33,12 +36,11 @@ function ProfilePage() {
             <Flex
               align="center"
               direction={{ base: 'column', lg: 'row' }}
-              mt={{ base: '-88px', lg: '-70px' }}
+              mt={{ base: '-88px', lg: '-40px' }}
               px={6}
             >
               <Avatar size="176px" border="4px solid white" src={user.image} />
               <Box
-                mt={{ base: 0, lg: '60px' }}
                 ml={{ base: 0, lg: 4 }}
                 textAlign={{ base: 'center', lg: 'left' }}
               >
@@ -52,12 +54,17 @@ function ProfilePage() {
               </Box>
             </Flex>
             <Flex align="flex-end" justify="center" gap={2} mt={4} px={6}>
-              <Button colorScheme="messenger" leftIcon={<FaUserPlus />}>
-                Add friend
-              </Button>
-              <Button leftIcon={<FaFacebookMessenger />} variant="gray">
-                Message
-              </Button>
+              {isOwnProfile && <Settings />}
+              {!isOwnProfile && (
+                <>
+                  <Button colorScheme="messenger" leftIcon={<FaUserPlus />}>
+                    Add friend
+                  </Button>
+                  <Button leftIcon={<FaFacebookMessenger />} variant="gray">
+                    Message
+                  </Button>
+                </>
+              )}
             </Flex>
           </Flex>
         </Box>
