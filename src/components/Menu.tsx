@@ -3,6 +3,7 @@ import { AiFillShop } from 'react-icons/ai'
 import { BiTimer } from 'react-icons/bi'
 import { FaUserFriends } from 'react-icons/fa'
 import { MdGroups, MdKeyboardArrowDown } from 'react-icons/md'
+import { Link } from 'react-router-dom'
 
 import { user } from '../utils/data.json'
 import Avatar from './Avatar'
@@ -10,13 +11,15 @@ import Avatar from './Avatar'
 function Menu() {
   return (
     <Flex as="aside" direction="column" w="100%">
-      <Button size="lg" variant="left">
-        <Avatar size="36px" src={user.image} />
-        <Text
-          ml={2}
-          fontSize="15px"
-        >{`${user.firstName} ${user.lastName}`}</Text>
-      </Button>
+      <Link to="/profile/1">
+        <Button w="100%" size="lg" variant="left">
+          <Avatar size="36px" src={user.image} />
+          <Text
+            ml={2}
+            fontSize="15px"
+          >{`${user.firstName} ${user.lastName}`}</Text>
+        </Button>
+      </Link>
       <Button size="lg" variant="left">
         <Icon as={FaUserFriends} color="blue.400" fontSize="36px" />
         <Text ml={2} fontSize="15px">

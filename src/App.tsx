@@ -1,3 +1,5 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+
 import Navbar from './components/Navbar'
 import AuthPage from './pages/AuthPage'
 import HomePage from './pages/HomePage'
@@ -9,12 +11,13 @@ function App() {
   if (!user) return <AuthPage />
 
   return (
-    <>
+    <BrowserRouter>
       <Navbar />
-      {/* TODO: Routing */}
-      {true && <ProfilePage />}
-      {false && <HomePage />}
-    </>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/profile/:userId" element={<ProfilePage />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

@@ -1,4 +1,5 @@
-import { Box, Button, Flex, Link, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Text } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 
 import { user } from '../utils/data.json'
 import Avatar from './Avatar'
@@ -21,13 +22,17 @@ function Contacts() {
           <Scrollbox maxH="230px">
             {user.friendRequests.map((friendRequest) => (
               <Flex key={friendRequest.id} align="center" gap={3} p={2}>
-                <Avatar size="60px" src={friendRequest.image} hover />
+                <Link to="profile/1">
+                  <Avatar size="60px" src={friendRequest.image} hover />
+                </Link>
                 <Flex direction="column" gap={2}>
-                  <Link
-                    fontSize="15px"
-                    fontWeight="semibold"
-                    href="/"
-                  >{`${friendRequest.firstName} ${friendRequest.lastName}`}</Link>
+                  <Link to="profile/1">
+                    <Text
+                      fontSize="15px"
+                      fontWeight="semibold"
+                      _hover={{ textDecoration: 'underline' }}
+                    >{`${friendRequest.firstName} ${friendRequest.lastName}`}</Text>
+                  </Link>
                   <Flex gap={2}>
                     <Button w="50%" colorScheme="messenger" size="sm">
                       Confirm
@@ -54,13 +59,15 @@ function Contacts() {
       </Text>
       <Scrollbox maxH="384px">
         {user.friends.map((friend) => (
-          <Button key={friend.id} py={6} variant="left">
-            <Avatar size="36px" src={friend.image} />
-            <Text
-              ml={2}
-              fontSize="15px"
-            >{`${friend.firstName} ${friend.lastName}`}</Text>
-          </Button>
+          <Link to="profile/1">
+            <Button key={friend.id} w="100%" py={6} variant="left">
+              <Avatar size="36px" src={friend.image} />
+              <Text
+                ml={2}
+                fontSize="15px"
+              >{`${friend.firstName} ${friend.lastName}`}</Text>
+            </Button>
+          </Link>
         ))}
       </Scrollbox>
     </Box>

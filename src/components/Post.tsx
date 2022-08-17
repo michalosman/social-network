@@ -3,12 +3,12 @@ import {
   Button,
   Divider,
   Flex,
-  Link,
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
 import moment from 'moment'
 import { FaRegCommentAlt, FaRegThumbsUp, FaThumbsUp } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
 import Avatar from './Avatar'
 import Comments from './Comments'
@@ -34,14 +34,18 @@ function Post({ ...post }: Props) {
   return (
     <Box p={4} pb={1} bg="white" borderRadius="md" shadow="base">
       <Flex gap={2} role="group">
-        <Avatar src={post.author.image} hover />
+        <Link to="/profile/1">
+          <Avatar src={post.author.image} hover />
+        </Link>
         <div>
-          <Link
-            mb={-0.5}
-            fontSize="15px"
-            fontWeight="semibold"
-            href="/"
-          >{`${post.author.firstName} ${post.author.lastName}`}</Link>
+          <Link to="/profile/1">
+            <Text
+              mb={-0.5}
+              fontSize="15px"
+              fontWeight="semibold"
+              _hover={{ textDecoration: 'underline' }}
+            >{`${post.author.firstName} ${post.author.lastName}`}</Text>
+          </Link>
           <Text color="gray.500" fontSize="13px">
             {moment(post.createdAt).fromNow()}
           </Text>

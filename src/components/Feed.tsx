@@ -1,4 +1,5 @@
 import { Flex, Input } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 
 import data, { posts } from '../utils/data.json'
 import Avatar from './Avatar'
@@ -10,7 +11,9 @@ function Feed() {
   return (
     <Flex as="main" direction="column" gap={4}>
       <Flex gap={2} w="100%" p={4} bg="white" borderRadius="md" shadow="base">
-        <Avatar src={user.image} hover />
+        <Link to="profile/1">
+          <Avatar src={user.image} hover />
+        </Link>
         <Input
           placeholder={`What's on your mind, ${user.firstName}?`}
           type="text"

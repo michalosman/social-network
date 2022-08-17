@@ -24,7 +24,7 @@ function ProfilePage() {
         <Box maxW="1250px" m="auto">
           <Image
             w="100%"
-            h={{ base: '250px', lg: '500px' }}
+            h={{ base: '250px', lg: '350px', xl: '500px' }}
             m="auto"
             borderRadius="lg"
             fallbackSrc="https://via.placeholder.com/2000/eee/eee?Text=qwerty"

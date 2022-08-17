@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
+import { Link } from 'react-router-dom'
 
 import { users } from '../utils/data.json'
 import Avatar from './Avatar'
@@ -46,23 +47,26 @@ function UserSearch() {
           borderRadius="md"
           shadow="lg"
         >
-          <Scrollbox maxH="176px">
+          <Scrollbox maxH="192px">
             {results.map((user) => (
-              <Button
-                justifyContent="flex-start"
-                w="100%"
-                px={2}
-                py={1}
-                textAlign="left"
-                size="lg"
-                variant="ghost"
-              >
-                <Avatar size="36px" src={user.image} />
-                <Text
-                  ml={2}
-                  fontSize="15px"
-                >{`${user.firstName} ${user.lastName}`}</Text>
-              </Button>
+              <Link to="/profile/1">
+                <Button
+                  justifyContent="flex-start"
+                  w="100%"
+                  px={2}
+                  py={1}
+                  textAlign="left"
+                  onClick={() => setSearchedUser('')}
+                  size="lg"
+                  variant="ghost"
+                >
+                  <Avatar size="36px" src={user.image} />
+                  <Text
+                    ml={2}
+                    fontSize="15px"
+                  >{`${user.firstName} ${user.lastName}`}</Text>
+                </Button>
+              </Link>
             ))}
             {!results.length && (
               <Text align="center" color="gray.500">

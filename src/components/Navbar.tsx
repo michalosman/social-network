@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { FaUser } from 'react-icons/fa'
 import { ImExit } from 'react-icons/im'
+import { Link } from 'react-router-dom'
 
 import data from '../utils/data.json'
 import Avatar from './Avatar'
@@ -37,11 +38,13 @@ function Navbar() {
         py={2}
       >
         <Flex gap={2}>
-          <Image
-            w="40px"
-            alt="Facebook logo"
-            src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg"
-          />
+          <Link to="/">
+            <Image
+              w="40px"
+              alt="Facebook logo"
+              src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg"
+            />
+          </Link>
           <UserSearch />
         </Flex>
         <Menu autoSelect={false}>
@@ -49,19 +52,21 @@ function Navbar() {
             <Avatar src={user.image} />
           </MenuButton>
           <MenuList mt={-1} p={2} fontSize="15px">
-            <MenuItem
-              px={1}
-              borderRadius="md"
-              icon={
-                <Box p={2} bg="gray.200" rounded="full">
-                  <FaUser fontSize="20px" />
-                </Box>
-              }
-            >
-              <Text mb={1} fontWeight="semibold">
-                My profile
-              </Text>
-            </MenuItem>
+            <Link to="/profile/1">
+              <MenuItem
+                px={1}
+                borderRadius="md"
+                icon={
+                  <Box p={2} bg="gray.200" rounded="full">
+                    <FaUser fontSize="20px" />
+                  </Box>
+                }
+              >
+                <Text mb={1} fontWeight="semibold">
+                  My profile
+                </Text>
+              </MenuItem>
+            </Link>
             <MenuItem
               px={1}
               borderRadius="md"
