@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const SERVER_URL =
-  `${process.env.REACT_APP_SERVER_URL}/comments` ||
+  `${import.meta.env.VITE_SERVER_URL}/comments` ||
   'http://localhost:5000/api/comments'
 
 const api = axios.create({ baseURL: SERVER_URL, withCredentials: true })
