@@ -1,13 +1,13 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import Navbar from './components/Navbar'
+import useAuth from './contexts/AuthContext'
 import AuthPage from './pages/AuthPage'
 import HomePage from './pages/HomePage'
 import ProfilePage from './pages/ProfilePage'
 
 function App() {
-  const user = {}
-
+  const { user } = useAuth()
   if (!user) return <AuthPage />
 
   return (

@@ -6,36 +6,71 @@ const SERVER_URL =
 
 const api = axios.create({ baseURL: SERVER_URL, withCredentials: true })
 
-export const register = (
+export const register = async (
   firstName: string,
   lastName: string,
   email: string,
   password: string
-) => api.post('/register', { firstName, lastName, email, password })
+): Promise<User> => {
+  const { data } = await api.post('/register', {
+    firstName,
+    lastName,
+    email,
+    password,
+  })
+  return data
+}
+export const login = async (email: string, password: string): Promise<User> => {
+  const { data } = await api.post('/login', { email, password })
+  return data
+}
 
-export const login = (email: string, password: string) =>
-  api.post('/login', { email, password })
+export const logout = async (): Promise<User> => {
+  const { data } = await api.post('/logout')
+  return data
+}
 
-export const logout = () => api.post('/logout')
+export const logoutAll = async (): Promise<User> => {
+  const { data } = await api.post('/logout/all')
+  return data
+}
 
-export const logoutAll = () => api.post('/logout/all')
-
-export const searchUsers = (
+export const getSearched = async (
   firstName: string,
   lastName: string,
   limit: number
-) => api.get('/search', { params: { firstName, lastName, limit } })
+): Promise<User[]> => {
+  const { data } = await api.get('/search', {
+    params: { firstName, lastName, limit },
+  })
+  return data
+}
 
-export const getUserProfile = (userId: string) => api.get(`/profile/${userId}`)
+export const getCurrentUser = async (): Promise<User> => {
+  const { data } = await api.get(`/`)
+  return data
+}
 
-export const requestFriend = (otherUserId: string) =>
-  api.patch(`/${otherUserId}/friend/request`)
+export const getUser = async (userId: string): Promise<User> => {
+  const { data } = await api.get(`/${userId}`)
+  return data
+}
 
-export const acceptFriend = (otherUserId: string) =>
-  api.patch(`/${otherUserId}/friend/accept`)
+export const requestFriend = async (otherUserId: string): Promise<User> => {
+  const { data } = await api.patch(`/${otherUserId}/friend/request`)
+  return data
+}
 
-export const rejectFriend = (otherUserId: string) =>
-  api.patch(`/${otherUserId}/friend/reject`)
+export const acceptFriend = async (otherUserId: string): Promise<User> => {
+  const { data } = await api.patch(`/${otherUserId}/friend/accept`)
+  return data
+}
 
-export const removeFriend = (otherUserId: string) =>
-  api.patch(`/${otherUserId}/friend/remove`)
+export const rejectFriend = async (otherUserId: string): Promise<User> => {
+  const { data } = await api.patch(`/${otherUserId}/friend/reject`)
+  return data
+}
+export const removeFriend = async (otherUserId: string): Promise<User> => {
+  const { data } = await api.patch(`/${otherUserId}/friend/remove`)
+  return data
+}
