@@ -1,27 +1,46 @@
 import {
   Box,
   Button,
+  Flex,
   Icon,
   Input,
   InputGroup,
   InputLeftElement,
+  Spinner,
   Text,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 
-import { users } from '../utils/data.json'
+import * as usersAPI from '../api/users'
 import Avatar from './Avatar'
 import Scrollbox from './Scrollbox'
 
 function UserSearch() {
-  const [searchedUser, setSearchedUser] = useState('')
+  const [searchedUser, setSearchedUser] = useState<string>('')
+  const [results, setResults] = useState<User[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
 
-  const results = users.filter((user) => {
-    const regex = new RegExp(searchedUser, 'gi')
-    return `${user.firstName} ${user.lastName}`.match(regex)
-  })
+  useEffect(() => {
+    updateResults()
+  }, [searchedUser])
+
+  const updateResults = async () => {
+    setLoading(true)
+    const words = searchedUser.trim().split(' ')
+    if (words[0] === '') return
+
+    const results = await usersAPI.getSearched(words[0], words[1], 10)
+    setResults(results)
+
+    if (results.length === 0) {
+      const lastNameResults = await usersAPI.getSearched(words[1], words[0], 10)
+      setResults(lastNameResults)
+    }
+
+    setTimeout(() => setLoading(false), 300)
+  }
 
   return (
     <Box pos="relative">
@@ -38,7 +57,7 @@ function UserSearch() {
           variant="round"
         />
       </InputGroup>
-      {searchedUser && (
+      {searchedUser.trim() && (
         <Box
           pos="absolute"
           w="240px"
@@ -47,33 +66,46 @@ function UserSearch() {
           borderRadius="md"
           shadow="lg"
         >
-          <Scrollbox maxH="192px">
-            {results.map((user) => (
-              <Link to="/profile/1">
-                <Button
-                  justifyContent="flex-start"
-                  w="100%"
-                  px={2}
-                  py={1}
-                  textAlign="left"
-                  onClick={() => setSearchedUser('')}
-                  size="lg"
-                  variant="ghost"
-                >
-                  <Avatar size="36px" src={user.image} />
-                  <Text
-                    ml={2}
-                    fontSize="15px"
-                  >{`${user.firstName} ${user.lastName}`}</Text>
-                </Button>
-              </Link>
-            ))}
-            {!results.length && (
-              <Text align="center" color="gray.500">
-                No results found
-              </Text>
-            )}
-          </Scrollbox>
+          {loading ? (
+            <Flex align="center" justify="center" h="192px">
+              <Spinner
+                w="75px"
+                h="75px"
+                color="messenger.500"
+                emptyColor="gray.200"
+                speed="0.7s"
+                thickness="3px"
+              />
+            </Flex>
+          ) : (
+            <Scrollbox maxH="192px">
+              {results.map((user) => (
+                <Link to={`/profile/${user.id}`} key={user.id}>
+                  <Button
+                    justifyContent="flex-start"
+                    w="100%"
+                    px={2}
+                    py={1}
+                    textAlign="left"
+                    onClick={() => setSearchedUser('')}
+                    size="lg"
+                    variant="ghost"
+                  >
+                    <Avatar size="36px" src={user.image} />
+                    <Text
+                      ml={2}
+                      fontSize="15px"
+                    >{`${user.firstName} ${user.lastName}`}</Text>
+                  </Button>
+                </Link>
+              ))}
+              {!results.length && (
+                <Text align="center" py={3} color="gray.500">
+                  No results found
+                </Text>
+              )}
+            </Scrollbox>
+          )}
         </Box>
       )}
     </Box>
