@@ -12,7 +12,7 @@ interface RegisterFormValues {
 }
 
 function RegisterForm() {
-  const { register, error } = useAuth()
+  const { register, error, setError } = useAuth()
 
   const formik = useFormik<RegisterFormValues>({
     initialValues: {
@@ -24,29 +24,26 @@ function RegisterForm() {
     validationSchema: Yup.object({
       firstName: Yup.string()
         .required('First name is required')
-        .max(20, 'Must be 20 characters or less'),
+        .max(30, 'Must be 30 characters or less'),
       lastName: Yup.string()
         .required('Last name is required')
-        .max(20, 'Must be 20 characters or less'),
+        .max(30, 'Must be 30 characters or less'),
       email: Yup.string()
-        .email('Invalid email address')
-        .required('Email is required'),
+        .required('Email is required')
+        .matches(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Email is invalid'),
       password: Yup.string()
         .required('Password is required')
-        .min(6, 'Must be between 6 and 20 characters')
-        .max(20, 'Must be between 6 and 20 characters'),
+        .min(6, 'Must be between 6 and 30 characters')
+        .max(30, 'Must be between 6 and 30 characters'),
     }),
-    onSubmit: async (values) => {
-      await register(
+    onSubmit: (values) =>
+      register(
         values.firstName,
         values.lastName,
         values.email,
         values.password
-      )
-    },
+      ),
   })
-
-  console.log(error)
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -88,19 +85,29 @@ function RegisterForm() {
       </FormControl>
       <FormControl
         mb={3}
-        isInvalid={(formik.errors.email && formik.touched.email) || undefined}
+        isInvalid={
+          (formik.errors.email && formik.touched.email) ||
+          (error && error.code === 409) ||
+          undefined
+        }
       >
         <Input
           id="email"
           name="email"
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e)
+            setError(null)
+          }}
           placeholder="Email or phone number"
           size="lg"
-          type="email"
+          type="text"
           value={formik.values.email}
         />
-        <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
+        <FormErrorMessage>
+          {formik.errors.email ||
+            (error && error.code === 409 && error.message)}
+        </FormErrorMessage>
       </FormControl>
       <FormControl
         mb={3}

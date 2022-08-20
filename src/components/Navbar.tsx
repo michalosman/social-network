@@ -12,13 +12,13 @@ import { FaUser } from 'react-icons/fa'
 import { ImExit } from 'react-icons/im'
 import { Link } from 'react-router-dom'
 
-import data from '../utils/data.json'
+import useAuth from '../contexts/AuthContext'
 import Avatar from './Avatar'
 import UserSearch from './UserSearch'
 
-const { user } = data
-
 function Navbar() {
+  const { user, logout } = useAuth()
+
   return (
     <Box
       as="nav"
@@ -38,18 +38,18 @@ function Navbar() {
         py={2}
       >
         <Flex gap={2}>
-          <Link to="/">
+          <a href="/">
             <Image
               w="40px"
               alt="Facebook logo"
               src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg"
             />
-          </Link>
+          </a>
           <UserSearch />
         </Flex>
         <Menu autoSelect={false}>
           <MenuButton _hover={{ filter: 'brightness(0.96)' }}>
-            <Avatar src={user.image} />
+            <Avatar src={user!.image} />
           </MenuButton>
           <MenuList mt={-1} p={2} fontSize="15px">
             <Link to="/profile/1">
@@ -75,6 +75,7 @@ function Navbar() {
                   <ImExit fontSize="20px" />
                 </Box>
               }
+              onClick={() => logout()}
             >
               <Text fontWeight="semibold">Log Out</Text>
             </MenuItem>

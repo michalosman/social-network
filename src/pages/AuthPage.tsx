@@ -61,7 +61,12 @@ function AuthPage() {
           shadow="xl"
         >
           {isLogin ? <LoginForm /> : <RegisterForm />}
-          <Link color="#1877F2" fontSize="14px" textAlign="center" href="/">
+          <Link
+            color="messenger.500"
+            fontSize="14px"
+            textAlign="center"
+            href="/"
+          >
             Forgot password?
           </Link>
           <Divider mt={2} mb={4} />

@@ -4,10 +4,13 @@ import Navbar from './components/Navbar'
 import useAuth from './contexts/AuthContext'
 import AuthPage from './pages/AuthPage'
 import HomePage from './pages/HomePage'
+import LoadingPage from './pages/LoadingPage'
 import ProfilePage from './pages/ProfilePage'
 
 function App() {
-  const { user } = useAuth()
+  const { user, initialLoading } = useAuth()
+
+  if (initialLoading) return <LoadingPage />
   if (!user) return <AuthPage />
 
   return (

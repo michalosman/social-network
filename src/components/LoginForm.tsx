@@ -2,12 +2,16 @@ import { Button, FormControl, FormErrorMessage, Input } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
+import useAuth from '../contexts/AuthContext'
+
 interface LoginFormValues {
   email: string
   password: string
 }
 
 function LoginForm() {
+  const { login, error, setError } = useAuth()
+
   const formik = useFormik<LoginFormValues>({
     initialValues: {
       email: '',
@@ -15,51 +19,66 @@ function LoginForm() {
     },
     validationSchema: Yup.object({
       email: Yup.string()
-        .email('Invalid email address')
-        .required('Email is required'),
-      password: Yup.string()
-        .required('Password is required')
-        .min(6, 'Must be between 6 and 20 characters')
-        .max(20, 'Must be between 6 and 20 characters'),
+        .required('Email is required')
+        .matches(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Email is invalid'),
+      password: Yup.string().required('Password is required'),
     }),
-    onSubmit: (values) => console.log(values),
+    onSubmit: (values) => login(values.email, values.password),
   })
 
   return (
     <form onSubmit={formik.handleSubmit}>
       <FormControl
         mb={3}
-        isInvalid={(formik.errors.email && formik.touched.email) || undefined}
+        isInvalid={
+          (formik.errors.email && formik.touched.email) ||
+          (error && error.code === 404) ||
+          undefined
+        }
       >
         <Input
           id="email"
           name="email"
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e)
+            setError(null)
+          }}
           placeholder="Email or phone number"
           size="lg"
-          type="email"
+          type="text"
           value={formik.values.email}
         />
-        <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
+        <FormErrorMessage>
+          {formik.errors.email ||
+            (error && error.code === 404 && error.message)}
+        </FormErrorMessage>
       </FormControl>
       <FormControl
         mb={3}
         isInvalid={
-          (formik.errors.password && formik.touched.password) || undefined
+          (formik.errors.password && formik.touched.password) ||
+          (error && error.code === 401) ||
+          undefined
         }
       >
         <Input
           id="password"
           name="password"
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e)
+            setError(null)
+          }}
           placeholder="Password"
           size="lg"
           type="password"
           value={formik.values.password}
         />
-        <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
+        <FormErrorMessage>
+          {formik.errors.password ||
+            (error && error.code === 401 && error.message)}
+        </FormErrorMessage>
       </FormControl>
       <Button
         w="100%"
