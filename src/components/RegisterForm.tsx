@@ -2,15 +2,19 @@ import { Button, FormControl, FormErrorMessage, Input } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
-interface FormFields {
+import useAuth from '../contexts/AuthContext'
+
+interface RegisterFormValues {
   firstName: string
   lastName: string
   email: string
   password: string
 }
 
-function SignUpForm() {
-  const formik = useFormik<FormFields>({
+function RegisterForm() {
+  const { register, error } = useAuth()
+
+  const formik = useFormik<RegisterFormValues>({
     initialValues: {
       firstName: '',
       lastName: '',
@@ -32,10 +36,17 @@ function SignUpForm() {
         .min(6, 'Must be between 6 and 20 characters')
         .max(20, 'Must be between 6 and 20 characters'),
     }),
-    onSubmit: (values) => console.log(values),
+    onSubmit: async (values) => {
+      await register(
+        values.firstName,
+        values.lastName,
+        values.email,
+        values.password
+      )
+    },
   })
 
-  console.log(formik.errors)
+  console.log(error)
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -123,4 +134,4 @@ function SignUpForm() {
   )
 }
 
-export default SignUpForm
+export default RegisterForm

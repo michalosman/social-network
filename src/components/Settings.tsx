@@ -17,7 +17,7 @@ import { useFormik } from 'formik'
 import { MdModeEditOutline } from 'react-icons/md'
 import * as Yup from 'yup'
 
-interface FormFields {
+interface SettingsFormValues {
   firstName: string
   lastName: string
   image: string
@@ -25,7 +25,7 @@ interface FormFields {
 
 function Settings() {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const formik = useFormik<FormFields>({
+  const formik = useFormik<SettingsFormValues>({
     initialValues: {
       firstName: '',
       lastName: '',

@@ -1,9 +1,12 @@
 import { Flex } from '@chakra-ui/react'
 import React from 'react'
 
-type Props = { maxH: string; children: React.ReactNode }
+interface ScrollboxProps {
+  maxH: string
+  children: React.ReactNode
+}
 
-function Scrollbox({ children, maxH }: Props) {
+function Scrollbox({ children, maxH }: ScrollboxProps) {
   return (
     <Flex
       sx={{

@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom'
 
 import Avatar from '../components/Avatar'
 import Post from '../components/Post'
-import Settings from '../components/SettingsModal'
+import Settings from '../components/Settings'
 import { posts, user, users } from '../utils/data.json'
 
 function ProfilePage() {

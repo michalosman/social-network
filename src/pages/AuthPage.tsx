@@ -10,7 +10,7 @@ import {
 import { useState } from 'react'
 
 import LoginForm from '../components/LoginForm'
-import SignUpForm from '../components/SignUpForm'
+import RegisterForm from '../components/RegisterForm'
 
 function AuthPage() {
   const [isLogin, setIsLogin] = useState(true)
@@ -60,7 +60,7 @@ function AuthPage() {
           borderRadius="lg"
           shadow="xl"
         >
-          {isLogin ? <LoginForm /> : <SignUpForm />}
+          {isLogin ? <LoginForm /> : <RegisterForm />}
           <Link color="#1877F2" fontSize="14px" textAlign="center" href="/">
             Forgot password?
           </Link>

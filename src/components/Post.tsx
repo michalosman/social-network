@@ -13,22 +13,7 @@ import { Link } from 'react-router-dom'
 import Avatar from './Avatar'
 import Comments from './Comments'
 
-type Props = {
-  id: string
-  text: string
-  image: string
-  createdAt: string
-  comments: string[]
-  likes: string[]
-  author: {
-    firstName: string
-    lastName: string
-    image: string
-    id: string
-  }
-}
-
-function Post({ ...post }: Props) {
+function Post({ ...post }: Post) {
   const { isOpen: commentsOpen, onToggle: toggleCommentsOpen } = useDisclosure()
 
   return (

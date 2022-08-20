@@ -2,13 +2,13 @@ import { Button, FormControl, FormErrorMessage, Input } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
-interface FormFields {
+interface LoginFormValues {
   email: string
   password: string
 }
 
 function LoginForm() {
-  const formik = useFormik<FormFields>({
+  const formik = useFormik<LoginFormValues>({
     initialValues: {
       email: '',
       password: '',
@@ -24,8 +24,6 @@ function LoginForm() {
     }),
     onSubmit: (values) => console.log(values),
   })
-
-  console.log(formik.errors)
 
   return (
     <form onSubmit={formik.handleSubmit}>
