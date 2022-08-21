@@ -4,17 +4,17 @@ import * as Yup from 'yup'
 
 import useAuth from '../contexts/AuthContext'
 
-interface RegisterFormValues {
+interface SignUpFormValues {
   firstName: string
   lastName: string
   email: string
   password: string
 }
 
-function RegisterForm() {
+function SignUpForm() {
   const { register, error, setError } = useAuth()
 
-  const formik = useFormik<RegisterFormValues>({
+  const formik = useFormik<SignUpFormValues>({
     initialValues: {
       firstName: '',
       lastName: '',
@@ -141,4 +141,4 @@ function RegisterForm() {
   )
 }
 
-export default RegisterForm
+export default SignUpForm

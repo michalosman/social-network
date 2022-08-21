@@ -8,15 +8,37 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { FaFacebookMessenger, FaUserPlus } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { useQuery } from 'react-query'
+import { Link, useParams } from 'react-router-dom'
 
+import * as postsAPI from '../api/postsAPI'
+import * as usersAPI from '../api/usersAPI'
 import Avatar from '../components/Avatar'
-import Post from '../components/Post'
-import Settings from '../components/Settings'
-import { posts, user, users } from '../utils/data.json'
+import EditProfile from '../components/EditProfile'
+import PostList from '../components/PostList'
+import useAuth from '../contexts/AuthContext'
+import ErrorPage from './ErrorPage'
 
 function ProfilePage() {
-  const isOwnProfile = true
+  const { user: currentUser } = useAuth()
+  const { userId } = useParams()
+
+  const {
+    data: user,
+    isLoading: isUserLoading,
+    error: userError,
+  } = useQuery<User>(['user', userId], () => usersAPI.getUser(userId!))
+
+  const {
+    data: timeline,
+    isLoading: isTimelineLoading,
+    error: timelineError,
+  } = useQuery<Post[]>(['timeline', userId], () =>
+    postsAPI.getTimeline(userId!, 0, 100)
+  )
+
+  if (userError || timelineError) return <ErrorPage />
+  if (isUserLoading || isTimelineLoading) return <div />
 
   return (
     <>
@@ -39,23 +61,23 @@ function ProfilePage() {
               mt={{ base: '-88px', lg: '-40px' }}
               px={6}
             >
-              <Avatar size="176px" border="4px solid white" src={user.image} />
+              <Avatar size="176px" border="4px solid white" src={user!.image} />
               <Box
                 ml={{ base: 0, lg: 4 }}
                 textAlign={{ base: 'center', lg: 'left' }}
               >
-                <Text
-                  fontSize="32px"
-                  fontWeight="bold"
-                >{`${user.firstName} ${user.lastName}`}</Text>
+                <Text fontSize="32px" fontWeight="bold">{`${user!.firstName} ${
+                  user!.lastName
+                }`}</Text>
                 <Text color="gray.500" fontSize="16px" fontWeight="semibold">
-                  {`${user.friends.length} friends`}
+                  {`${user!.friends.length} friends`}
                 </Text>
               </Box>
             </Flex>
             <Flex align="flex-end" justify="center" gap={2} mt={4} px={6}>
-              {isOwnProfile && <Settings />}
-              {!isOwnProfile && (
+              {currentUser!.id === userId ? (
+                <EditProfile />
+              ) : (
                 <>
                   <Button colorScheme="messenger" leftIcon={<FaUserPlus />}>
                     Add friend
@@ -88,17 +110,16 @@ function ProfilePage() {
           <Text fontSize="20px" fontWeight="bold">
             Friends
           </Text>
-          <Text
-            color="gray.500"
-            fontSize="17px"
-          >{`${user.friends.length} friends`}</Text>
+          <Text color="gray.500" fontSize="17px">{`${
+            user!.friends.length
+          } friends`}</Text>
           <Grid
             gap={4}
             templateColumns="repeat(3, 1fr)"
             w={{ base: 'none', lg: '490px' }}
             mt={3}
           >
-            {users.map((friend) => (
+            {user!.friends.map((friend) => (
               <GridItem key={friend.id}>
                 <Link to="/profile/1">
                   <Image
@@ -114,16 +135,14 @@ function ProfilePage() {
                     fontSize="13px"
                     fontWeight="semibold"
                     _hover={{ textDecoration: 'underline' }}
-                  >{`${user.firstName} ${user.lastName}`}</Text>
+                  >{`${user!.firstName} ${user!.lastName}`}</Text>
                 </Link>
               </GridItem>
             ))}
           </Grid>
         </Flex>
         <Flex direction="column" gap={4}>
-          {posts.map((post) => (
-            <Post {...post} key={post.id} />
-          ))}
+          <PostList posts={timeline!} />
         </Flex>
       </Flex>
     </>

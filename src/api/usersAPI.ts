@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const SERVER_URL =
-  `${import.meta.env.VITE_SERVER_URL}/users` ||
+  `${import.meta.env.VITE_SERVER_URL}/api/users` ||
   'http://localhost:5000/api/users'
 
 const api = axios.create({ baseURL: SERVER_URL, withCredentials: true })

@@ -1,8 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import Navbar from './components/Navbar'
+import NavBar from './components/NavBar'
 import useAuth from './contexts/AuthContext'
 import AuthPage from './pages/AuthPage'
+import ErrorPage from './pages/ErrorPage'
 import HomePage from './pages/HomePage'
 import LoadingPage from './pages/LoadingPage'
 import ProfilePage from './pages/ProfilePage'
@@ -15,9 +16,11 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navbar />
+      <NavBar />
       <Routes>
+        <Route path="*" element={<ErrorPage />} />
         <Route path="/" element={<HomePage />} />
+        <Route path="/profile/:userId" element={<ProfilePage />} />
         <Route path="/profile/:userId" element={<ProfilePage />} />
       </Routes>
     </BrowserRouter>

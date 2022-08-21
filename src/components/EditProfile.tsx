@@ -17,15 +17,19 @@ import { useFormik } from 'formik'
 import { MdModeEditOutline } from 'react-icons/md'
 import * as Yup from 'yup'
 
-interface SettingsFormValues {
+import useAuth from '../contexts/AuthContext'
+
+interface EditProfileFormValues {
   firstName: string
   lastName: string
   image: string
 }
 
-function Settings() {
+function EditProfile() {
+  const { user } = useAuth()
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const formik = useFormik<SettingsFormValues>({
+
+  const formik = useFormik<EditProfileFormValues>({
     initialValues: {
       firstName: '',
       lastName: '',
@@ -38,8 +42,6 @@ function Settings() {
     onSubmit: (values) => console.log(values),
   })
 
-  console.log(formik.errors)
-
   return (
     <>
       <Button
@@ -51,10 +53,10 @@ function Settings() {
       </Button>
       <Modal isCentered isOpen={isOpen} onClose={onClose} preserveScrollBarGap>
         <ModalOverlay />
-        <form onSubmit={formik.handleSubmit}>
-          <ModalContent>
-            <ModalHeader>Edit profile</ModalHeader>
-            <ModalCloseButton rounded="full" />
+        <ModalContent>
+          <ModalHeader>Edit profile</ModalHeader>
+          <ModalCloseButton rounded="full" />
+          <form onSubmit={formik.handleSubmit}>
             <ModalBody pb={6}>
               <FormControl>
                 <FormLabel>Profile Picture</FormLabel>
@@ -80,7 +82,7 @@ function Settings() {
                   name="firstName"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
-                  placeholder="user.firstName"
+                  placeholder={user!.firstName}
                   type="text"
                   value={formik.values.firstName}
                 />
@@ -99,7 +101,7 @@ function Settings() {
                   name="lastName"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
-                  placeholder="user.lastName"
+                  placeholder={user!.lastName}
                   type="text"
                   value={formik.values.lastName}
                 />
@@ -112,11 +114,11 @@ function Settings() {
               </Button>
               <Button onClick={onClose}>Cancel</Button>
             </ModalFooter>
-          </ModalContent>
-        </form>
+          </form>
+        </ModalContent>
       </Modal>
     </>
   )
 }
 
-export default Settings
+export default EditProfile

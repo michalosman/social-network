@@ -4,15 +4,15 @@ import * as Yup from 'yup'
 
 import useAuth from '../contexts/AuthContext'
 
-interface LoginFormValues {
+interface SignInFormValues {
   email: string
   password: string
 }
 
-function LoginForm() {
+function SignInForm() {
   const { login, error, setError } = useAuth()
 
-  const formik = useFormik<LoginFormValues>({
+  const formik = useFormik<SignInFormValues>({
     initialValues: {
       email: '',
       password: '',
@@ -94,4 +94,4 @@ function LoginForm() {
   )
 }
 
-export default LoginForm
+export default SignInForm

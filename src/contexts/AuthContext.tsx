@@ -7,12 +7,12 @@ import React, {
   useState,
 } from 'react'
 
-import * as usersAPI from '../api/users'
+import * as usersAPI from '../api/usersAPI'
 
 interface AuthContextType {
   user: User | null
   error: any
-  loading: boolean
+  isLoading: boolean
   initialLoading: boolean
   setError: React.Dispatch<any>
   register: (
@@ -31,7 +31,7 @@ const AuthContext = createContext<AuthContextType>({} as AuthContextType)
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [error, setError] = useState<any>(null)
-  const [loading, setLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [initialLoading, setInitialLoading] = useState<boolean>(true)
 
   useEffect(() => {
@@ -56,7 +56,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     password: string
   ) => {
     setError(null)
-    setLoading(true)
+    setIsLoading(true)
 
     try {
       const user = await usersAPI.register(firstName, lastName, email, password)
@@ -64,13 +64,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch (error: any) {
       setError(error.response.data.error)
     } finally {
-      setLoading(false)
+      setIsLoading(false)
     }
   }
 
   const login = async (email: string, password: string) => {
     setError(null)
-    setLoading(true)
+    setIsLoading(true)
 
     try {
       const user = await usersAPI.login(email, password)
@@ -78,13 +78,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch (error: any) {
       setError(error.response.data.error)
     } finally {
-      setLoading(false)
+      setIsLoading(false)
     }
   }
 
   const logout = async () => {
     setError(null)
-    setLoading(true)
+    setIsLoading(true)
 
     try {
       await usersAPI.logout()
@@ -92,13 +92,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch (error: any) {
       setError(error.response.data.error)
     } finally {
-      setLoading(false)
+      setIsLoading(false)
     }
   }
 
   const logoutAll = async () => {
     setError(null)
-    setLoading(true)
+    setIsLoading(true)
 
     try {
       await usersAPI.logoutAll()
@@ -106,7 +106,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch (error: any) {
       setError(error.response.data.error)
     } finally {
-      setLoading(false)
+      setIsLoading(false)
     }
   }
 
@@ -114,7 +114,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     () => ({
       user,
       error,
-      loading,
+      isLoading,
       initialLoading,
       setError,
       register,
@@ -122,7 +122,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       logout,
       logoutAll,
     }),
-    [user, loading, initialLoading, error]
+    [user, isLoading, initialLoading, error]
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

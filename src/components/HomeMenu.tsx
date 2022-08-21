@@ -5,19 +5,20 @@ import { FaUserFriends } from 'react-icons/fa'
 import { MdGroups, MdKeyboardArrowDown } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 
-import { user } from '../utils/data.json'
+import useAuth from '../contexts/AuthContext'
 import Avatar from './Avatar'
 
-function Menu() {
+function HomeMenu() {
+  const { user } = useAuth()
+
   return (
-    <Flex as="aside" direction="column" w="100%">
-      <Link to="/profile/1">
+    <Flex direction="column" w="100%">
+      <Link to={`/profile/${user!.id}`}>
         <Button w="100%" size="lg" variant="left">
-          <Avatar size="36px" src={user.image} />
-          <Text
-            ml={2}
-            fontSize="15px"
-          >{`${user.firstName} ${user.lastName}`}</Text>
+          <Avatar size="36px" src={user!.image} />
+          <Text ml={2} fontSize="15px">{`${user!.firstName} ${
+            user!.lastName
+          }`}</Text>
         </Button>
       </Link>
       <Button size="lg" variant="left">
@@ -54,4 +55,4 @@ function Menu() {
   )
 }
 
-export default Menu
+export default HomeMenu

@@ -11,9 +11,14 @@ import { FaRegCommentAlt, FaRegThumbsUp, FaThumbsUp } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 import Avatar from './Avatar'
-import Comments from './Comments'
+import CommentForm from './CommentForm'
+import CommentList from './CommentList'
 
-function Post({ ...post }: Post) {
+interface PostItemProps {
+  post: Post
+}
+
+function PostItem({ post }: PostItemProps) {
   const { isOpen: commentsOpen, onToggle: toggleCommentsOpen } = useDisclosure()
 
   return (
@@ -77,9 +82,15 @@ function Post({ ...post }: Post) {
       >
         Comment
       </Button>
-      {commentsOpen && <Comments />}
+      {commentsOpen && (
+        <Flex direction="column" gap={4}>
+          <Divider mt={1} />
+          <CommentForm postId={post.id} />
+          <CommentList postId={post.id} />
+        </Flex>
+      )}
     </Box>
   )
 }
 
-export default Post
+export default PostItem

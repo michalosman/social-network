@@ -6,40 +6,32 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  Spinner,
   Text,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 
-import * as usersAPI from '../api/users'
+import * as usersAPI from '../api/usersAPI'
 import Avatar from './Avatar'
+import Loading from './Loading'
 import Scrollbox from './Scrollbox'
 
-function UserSearch() {
+function NavSearch() {
   const [searchedUser, setSearchedUser] = useState<string>('')
   const [results, setResults] = useState<User[]>([])
-  const [loading, setLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
     updateResults()
   }, [searchedUser])
 
   const updateResults = async () => {
-    setLoading(true)
-    const words = searchedUser.trim().split(' ')
-    if (words[0] === '') return
-
-    const results = await usersAPI.getSearched(words[0], words[1], 10)
+    setIsLoading(true)
+    const [firstName, lastName] = searchedUser.trim().split(' ')
+    const results = await usersAPI.getSearched(firstName, lastName, 10)
     setResults(results)
-
-    if (results.length === 0) {
-      const lastNameResults = await usersAPI.getSearched(words[1], words[0], 10)
-      setResults(lastNameResults)
-    }
-
-    setTimeout(() => setLoading(false), 300)
+    setTimeout(() => setIsLoading(false), 500)
   }
 
   return (
@@ -66,21 +58,14 @@ function UserSearch() {
           borderRadius="md"
           shadow="lg"
         >
-          {loading ? (
+          {isLoading ? (
             <Flex align="center" justify="center" h="192px">
-              <Spinner
-                w="75px"
-                h="75px"
-                color="messenger.500"
-                emptyColor="gray.200"
-                speed="0.7s"
-                thickness="3px"
-              />
+              <Loading />
             </Flex>
           ) : (
             <Scrollbox maxH="192px">
               {results.map((user) => (
-                <Link to={`/profile/${user.id}`} key={user.id}>
+                <Link key={user.id} to={`/profile/${user.id}`}>
                   <Button
                     justifyContent="flex-start"
                     w="100%"
@@ -112,4 +97,4 @@ function UserSearch() {
   )
 }
 
-export default UserSearch
+export default NavSearch
