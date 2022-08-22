@@ -40,6 +40,7 @@ export const getSearched = async (
   lastName: string,
   limit: number
 ): Promise<User[]> => {
+  if (!firstName) return []
   const { data } = await api.get('/search', {
     params: { firstName, lastName, limit },
   })
@@ -53,6 +54,17 @@ export const getCurrentUser = async (): Promise<User> => {
 
 export const getUser = async (userId: string): Promise<User> => {
   const { data } = await api.get(`/${userId}`)
+  return data
+}
+
+export const update = async (updatedFields: {
+  firstName?: string
+  lastName?: string
+  email?: string
+  password?: string
+  image?: string
+}): Promise<User> => {
+  const { data } = await api.patch(`/`, updatedFields)
   return data
 }
 
