@@ -83,7 +83,7 @@ function EditProfile() {
   })
 
   return (
-    <>
+    <div>
       <Button
         leftIcon={<MdModeEditOutline fontSize="20px" />}
         onClick={onOpen}
@@ -92,13 +92,13 @@ function EditProfile() {
         Edit profile
       </Button>
       <Modal
-        blockScrollOnMount
         isCentered
         isOpen={isOpen}
         onClose={() => {
           formik.resetForm()
           onClose()
         }}
+        preserveScrollBarGap
       >
         <ModalOverlay />
         <ModalContent>
@@ -209,7 +209,7 @@ function EditProfile() {
           </form>
         </ModalContent>
       </Modal>
-    </>
+    </div>
   )
 }
 
