@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from 'react-query'
 import { Link } from 'react-router-dom'
 
 import * as commentsAPI from '../api/commentsAPI'
+import useAuth from '../contexts/AuthContext'
 import Avatar from './Avatar'
 
 interface CommentFormProps {
@@ -11,6 +12,7 @@ interface CommentFormProps {
 }
 
 function CommentForm({ postId }: CommentFormProps) {
+  const { user } = useAuth()
   const queryClient = useQueryClient()
 
   const createCommentMutation = useMutation(
@@ -26,13 +28,13 @@ function CommentForm({ postId }: CommentFormProps) {
     },
     onSubmit: (values) => {
       createCommentMutation.mutate(values.text)
-      formik.values.text = ''
+      formik.resetForm()
     },
   })
 
   return (
-    <Flex gap={2}>
-      <Link to="/profile/1">
+    <Flex gap={2} mb={3}>
+      <Link to={`/profile/${user.id}`}>
         <Avatar size="32px" src="" hover />
       </Link>
       <form onSubmit={formik.handleSubmit} style={{ flex: 1 }}>

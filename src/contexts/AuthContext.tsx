@@ -10,7 +10,7 @@ import React, {
 import * as usersAPI from '../api/usersAPI'
 
 interface AuthContextType {
-  user: User | null
+  user: User
   error: any
   isLoading: boolean
   initialLoading: boolean
@@ -28,8 +28,19 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType)
 
+export const initialUser: User = {
+  id: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  image: '',
+  friends: [],
+  friendRequests: [],
+  posts: [],
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<User>(initialUser)
   const [error, setError] = useState<any>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [initialLoading, setInitialLoading] = useState<boolean>(true)
@@ -88,7 +99,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     try {
       await usersAPI.logout()
-      setUser(null)
+      setUser(initialUser)
     } catch (error: any) {
       setError(error.response.data.error)
     } finally {
@@ -102,7 +113,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     try {
       await usersAPI.logoutAll()
-      setUser(null)
+      setUser(initialUser)
     } catch (error: any) {
       setError(error.response.data.error)
     } finally {

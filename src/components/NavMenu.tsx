@@ -8,21 +8,22 @@ import {
 } from '@chakra-ui/react'
 import { FaUser } from 'react-icons/fa'
 import { ImExit } from 'react-icons/im'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import useAuth from '../contexts/AuthContext'
 import Avatar from './Avatar'
 
 function NavMenu() {
   const { user, logout } = useAuth()
+  const navigate = useNavigate()
 
   return (
     <Menu autoSelect={false}>
       <MenuButton _hover={{ filter: 'brightness(0.96)' }}>
-        <Avatar src={user!.image} />
+        <Avatar src={user.image} />
       </MenuButton>
       <MenuList mt={-1} p={2} fontSize="15px">
-        <Link to={`/profile/${user!.id}`}>
+        <Link to={`/profile/${user.id}`}>
           <MenuItem
             px={1}
             borderRadius="md"
@@ -45,7 +46,10 @@ function NavMenu() {
               <ImExit fontSize="20px" />
             </Box>
           }
-          onClick={() => logout()}
+          onClick={() => {
+            logout()
+            navigate('/')
+          }}
         >
           <Text fontWeight="semibold">Log Out</Text>
         </MenuItem>

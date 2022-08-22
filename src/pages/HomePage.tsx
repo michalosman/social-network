@@ -55,10 +55,10 @@ function HomePage() {
         maxW="360px"
         mt={5}
       >
-        {user!.friendRequests.length > 0 && (
-          <FriendRequestList friendRequests={user!.friendRequests} />
+        {user.friendRequests.length > 0 && (
+          <FriendRequestList friendRequests={user.friendRequests} />
         )}
-        {user!.friends.length > 0 && <FriendList friends={user!.friends} />}
+        {user.friends.length > 0 && <FriendList friends={user.friends} />}
       </Box>
     </Flex>
   )

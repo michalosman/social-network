@@ -24,21 +24,21 @@ function PostForm() {
     },
     onSubmit: (values) => {
       createPostMutation.mutate(values.text)
-      formik.values.text = ''
+      formik.resetForm()
     },
   })
 
   return (
     <Flex gap={2} w="100%" p={4} bg="white" borderRadius="md" shadow="base">
       <Link to="profile/1">
-        <Avatar src={user!.image} hover />
+        <Avatar src={user.image} hover />
       </Link>
       <form onSubmit={formik.handleSubmit} style={{ flex: 1 }}>
         <Input
           id="text"
           name="text"
           onChange={formik.handleChange}
-          placeholder={`What's on your mind, ${user!.firstName}?`}
+          placeholder={`What's on your mind, ${user.firstName}?`}
           type="text"
           value={formik.values.text}
           variant="round"

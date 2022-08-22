@@ -8,8 +8,9 @@ import {
   InputLeftElement,
   Text,
 } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
+import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
 
 import * as usersAPI from '../api/usersAPI'
@@ -18,21 +19,14 @@ import Loading from './Loading'
 import Scrollbox from './Scrollbox'
 
 function NavSearch() {
-  const [searchedUser, setSearchedUser] = useState<string>('')
-  const [results, setResults] = useState<User[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [searchPhrase, setSearchPhrase] = useState<string>('')
 
-  useEffect(() => {
-    updateResults()
-  }, [searchedUser])
-
-  const updateResults = async () => {
-    setIsLoading(true)
-    const [firstName, lastName] = searchedUser.trim().split(' ')
-    const results = await usersAPI.getSearched(firstName, lastName, 10)
-    setResults(results)
-    setTimeout(() => setIsLoading(false), 500)
-  }
+  const { data: searchResults, isLoading: areSearchResultsLoading } = useQuery<
+    User[]
+  >(['searchResults', searchPhrase], () => {
+    const [firstName, lastName] = searchPhrase.trim().split(' ')
+    return usersAPI.getSearched(firstName, lastName, 10)
+  })
 
   return (
     <Box pos="relative">
@@ -42,14 +36,14 @@ function NavSearch() {
         </InputLeftElement>
         <Input
           maxW="240px"
-          onChange={(e) => setSearchedUser(e.target.value)}
+          onChange={(e) => setSearchPhrase(e.target.value)}
           placeholder="Search Facebook"
           type="text"
-          value={searchedUser}
+          value={searchPhrase}
           variant="round"
         />
       </InputGroup>
-      {searchedUser.trim() && (
+      {searchPhrase.trim() && (
         <Box
           pos="absolute"
           w="240px"
@@ -58,13 +52,13 @@ function NavSearch() {
           borderRadius="md"
           shadow="lg"
         >
-          {isLoading ? (
+          {areSearchResultsLoading || !searchResults ? (
             <Flex align="center" justify="center" h="192px">
               <Loading />
             </Flex>
           ) : (
             <Scrollbox maxH="192px">
-              {results.map((user) => (
+              {searchResults.map((user) => (
                 <Link key={user.id} to={`/profile/${user.id}`}>
                   <Button
                     justifyContent="flex-start"
@@ -72,7 +66,7 @@ function NavSearch() {
                     px={2}
                     py={1}
                     textAlign="left"
-                    onClick={() => setSearchedUser('')}
+                    onClick={() => setSearchPhrase('')}
                     size="lg"
                     variant="ghost"
                   >
@@ -84,7 +78,7 @@ function NavSearch() {
                   </Button>
                 </Link>
               ))}
-              {!results.length && (
+              {searchResults.length === 0 && (
                 <Text align="center" py={3} color="gray.500">
                   No results found
                 </Text>

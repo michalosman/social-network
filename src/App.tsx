@@ -12,7 +12,7 @@ function App() {
   const { user, initialLoading } = useAuth()
 
   if (initialLoading) return <LoadingPage />
-  if (!user) return <AuthPage />
+  if (!user.id) return <AuthPage />
 
   return (
     <BrowserRouter>
@@ -20,7 +20,6 @@ function App() {
       <Routes>
         <Route path="*" element={<ErrorPage />} />
         <Route path="/" element={<HomePage />} />
-        <Route path="/profile/:userId" element={<ProfilePage />} />
         <Route path="/profile/:userId" element={<ProfilePage />} />
       </Routes>
     </BrowserRouter>

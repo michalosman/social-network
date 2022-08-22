@@ -13,12 +13,13 @@ function HomeMenu() {
 
   return (
     <Flex direction="column" w="100%">
-      <Link to={`/profile/${user!.id}`}>
+      <Link to={`/profile/${user.id}`}>
         <Button w="100%" size="lg" variant="left">
-          <Avatar size="36px" src={user!.image} />
-          <Text ml={2} fontSize="15px">{`${user!.firstName} ${
-            user!.lastName
-          }`}</Text>
+          <Avatar size="36px" src={user.image} />
+          <Text
+            ml={2}
+            fontSize="15px"
+          >{`${user.firstName} ${user.lastName}`}</Text>
         </Button>
       </Link>
       <Button size="lg" variant="left">

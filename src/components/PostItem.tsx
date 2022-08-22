@@ -24,11 +24,11 @@ function PostItem({ post }: PostItemProps) {
   return (
     <Box p={4} pb={1} bg="white" borderRadius="md" shadow="base">
       <Flex gap={2} role="group">
-        <Link to="/profile/1">
+        <Link to={`/profile/${post.author.id}`}>
           <Avatar src={post.author.image} hover />
         </Link>
         <div>
-          <Link to="/profile/1">
+          <Link to={`/profile/${post.author.id}`}>
             <Text
               mb={-0.5}
               fontSize="15px"
@@ -83,8 +83,8 @@ function PostItem({ post }: PostItemProps) {
         Comment
       </Button>
       {commentsOpen && (
-        <Flex direction="column" gap={4}>
-          <Divider mt={1} />
+        <Flex direction="column">
+          <Divider mt={1} mb={4} />
           <CommentForm postId={post.id} />
           <CommentList postId={post.id} />
         </Flex>
