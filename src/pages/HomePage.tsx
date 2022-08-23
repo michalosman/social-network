@@ -2,15 +2,15 @@ import { Box, Flex } from '@chakra-ui/react'
 import { useQuery } from 'react-query'
 
 import * as postsAPI from '../api/postsAPI'
+import * as usersAPI from '../api/usersAPI'
 import FriendList from '../components/FriendList'
 import FriendRequestList from '../components/FriendRequestList'
 import HomeMenu from '../components/HomeMenu'
 import PostForm from '../components/PostForm'
 import PostList from '../components/PostList'
-import useAuth from '../contexts/AuthContext'
 
 function HomePage() {
-  const { user } = useAuth()
+  const { data: user } = useQuery<User>('user', usersAPI.getCurrentUser)
 
   const { data: feed, isLoading: isFeedLoading } = useQuery<Post[]>(
     'posts',
@@ -21,7 +21,7 @@ function HomePage() {
       })
   )
 
-  if (isFeedLoading) return <div />
+  if (!user || isFeedLoading) return <div />
 
   return (
     <Flex
