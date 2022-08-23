@@ -1,8 +1,7 @@
 import { Button, Flex, Text } from '@chakra-ui/react'
-import { useMutation, useQueryClient } from 'react-query'
 import { Link } from 'react-router-dom'
 
-import * as usersAPI from '../api/usersAPI'
+import useFriendship from '../hooks/useFriendship'
 import Avatar from './Avatar'
 
 interface FriendRequestItemProps {
@@ -10,27 +9,7 @@ interface FriendRequestItemProps {
 }
 
 function FriendRequestItem({ friendRequest }: FriendRequestItemProps) {
-  const queryClient = useQueryClient()
-
-  const { mutate: acceptFriend } = useMutation(
-    () => usersAPI.acceptFriend(friendRequest.id),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('user')
-        queryClient.invalidateQueries('profile')
-      },
-    }
-  )
-
-  const { mutate: rejectFriend } = useMutation(
-    () => usersAPI.rejectFriend(friendRequest.id),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('user')
-        queryClient.invalidateQueries('profile')
-      },
-    }
-  )
+  const { acceptFriend, rejectFriend } = useFriendship()
 
   return (
     <Flex key={friendRequest.id} align="center" gap={3} p={2}>
@@ -49,14 +28,14 @@ function FriendRequestItem({ friendRequest }: FriendRequestItemProps) {
           <Button
             w="50%"
             colorScheme="messenger"
-            onClick={() => acceptFriend()}
+            onClick={() => acceptFriend(friendRequest.id)}
             size="sm"
           >
             Confirm
           </Button>
           <Button
             w="50%"
-            onClick={() => rejectFriend()}
+            onClick={() => rejectFriend(friendRequest.id)}
             size="sm"
             variant="gray"
           >

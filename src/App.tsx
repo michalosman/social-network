@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import NavBar from './components/NavBar'
-import useAuth from './contexts/AuthContext'
+import useAuth from './hooks/useAuth'
 import AuthPage from './pages/AuthPage'
 import ErrorPage from './pages/ErrorPage'
 import HomePage from './pages/HomePage'
@@ -12,7 +12,7 @@ function App() {
   const { user, initialLoading } = useAuth()
 
   if (initialLoading) return <LoadingPage />
-  if (!user.id) return <AuthPage />
+  if (!user) return <AuthPage />
 
   return (
     <BrowserRouter>

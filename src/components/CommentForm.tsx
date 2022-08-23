@@ -1,10 +1,9 @@
 import { Flex, Input } from '@chakra-ui/react'
 import { useFormik } from 'formik'
-import { useMutation, useQueryClient } from 'react-query'
 import { Link } from 'react-router-dom'
 
-import * as commentsAPI from '../api/commentsAPI'
-import useAuth from '../contexts/AuthContext'
+import useComment from '../hooks/useComment'
+import useUser from '../hooks/useUser'
 import Avatar from './Avatar'
 
 interface CommentFormProps {
@@ -16,19 +15,15 @@ interface CreateCommentFormValues {
 }
 
 function CommentForm({ postId }: CommentFormProps) {
-  const { user } = useAuth()
-  const queryClient = useQueryClient()
-
-  const createCommentMutation = useMutation(commentsAPI.create, {
-    onSuccess: () => queryClient.invalidateQueries(`comments${postId}`),
-  })
+  const { user } = useUser()
+  const { createComment } = useComment(postId)
 
   const formik = useFormik<CreateCommentFormValues>({
     initialValues: {
       text: '',
     },
     onSubmit: (values) => {
-      createCommentMutation.mutate({ postId, ...values })
+      createComment({ postId, ...values })
       formik.resetForm()
     },
   })

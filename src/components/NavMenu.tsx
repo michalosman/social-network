@@ -10,11 +10,13 @@ import { FaUser } from 'react-icons/fa'
 import { ImExit } from 'react-icons/im'
 import { Link, useNavigate } from 'react-router-dom'
 
-import useAuth from '../contexts/AuthContext'
+import useAuth from '../hooks/useAuth'
+import useUser from '../hooks/useUser'
 import Avatar from './Avatar'
 
 function NavMenu() {
-  const { user, logout } = useAuth()
+  const { user } = useUser()
+  const { logout } = useAuth()
   const navigate = useNavigate()
 
   return (

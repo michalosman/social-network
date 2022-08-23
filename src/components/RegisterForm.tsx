@@ -2,7 +2,7 @@ import { Button, FormControl, FormErrorMessage, Input } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
-import useAuth from '../contexts/AuthContext'
+import useAuth from '../hooks/useAuth'
 
 interface RegisterFormValues {
   firstName: string

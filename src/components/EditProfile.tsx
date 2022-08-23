@@ -15,11 +15,9 @@ import {
 } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import { MdModeEditOutline } from 'react-icons/md'
-import { useMutation, useQueryClient } from 'react-query'
 import * as Yup from 'yup'
 
-import * as usersAPI from '../api/usersAPI'
-import useAuth from '../contexts/AuthContext'
+import useUser from '../hooks/useUser'
 
 interface EditProfileFormValues {
   firstName: string
@@ -30,22 +28,8 @@ interface EditProfileFormValues {
 }
 
 function EditProfile() {
-  const { user } = useAuth()
+  const { user, updateUser: update } = useUser()
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const queryClient = useQueryClient()
-
-  const editProfileMutation = useMutation(
-    (updatedFields: {
-      firstName?: string
-      lastName?: string
-      email?: string
-      password?: string
-      image?: string
-    }) => usersAPI.update(updatedFields),
-    {
-      onSuccess: () => queryClient.invalidateQueries(`profile`),
-    }
-  )
 
   const formik = useFormik<EditProfileFormValues>({
     initialValues: {
@@ -76,7 +60,7 @@ function EditProfile() {
         }
       }
 
-      editProfileMutation.mutate(updatedFields)
+      update(updatedFields)
       formik.resetForm()
       onClose()
     },

@@ -6,7 +6,7 @@ const SERVER_URL =
 
 const api = axios.create({ baseURL: SERVER_URL, withCredentials: true })
 
-export const create = async (text: string): Promise<Post> => {
+export const createPost = async (text: string): Promise<Post> => {
   const { data } = await api.post('/', { text })
   return data
 }
@@ -26,12 +26,12 @@ export const getTimeline = async (
   return data
 }
 
-export const like = async (postId: string): Promise<Post> => {
+export const likePost = async (postId: string): Promise<Post> => {
   const { data } = await api.patch(`/${postId}/like`)
   return data
 }
 
-export const unlike = async (postId: string): Promise<Post> => {
+export const unlikePost = async (postId: string): Promise<Post> => {
   const { data } = await api.patch(`/${postId}/unlike`)
   return data
 }

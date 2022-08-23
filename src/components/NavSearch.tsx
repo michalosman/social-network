@@ -10,27 +10,16 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
-import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
 
-import * as usersAPI from '../api/usersAPI'
+import useSearch from '../hooks/useSearch'
 import Avatar from './Avatar'
 import Loading from './Loading'
 import Scrollbox from './Scrollbox'
 
 function NavSearch() {
   const [searchPhrase, setSearchPhrase] = useState<string>('')
-
-  const { data: searchResults, isLoading: areSearchResultsLoading } = useQuery<
-    User[]
-  >(['searchResults', searchPhrase], () => {
-    const [firstName, lastName] = searchPhrase.trim().split(' ')
-    return usersAPI.getSearched({
-      firstName,
-      lastName,
-      limit: 10,
-    })
-  })
+  const { searchResults, searchResultsInfo } = useSearch(searchPhrase)
 
   return (
     <Box pos="relative">
@@ -56,7 +45,7 @@ function NavSearch() {
           borderRadius="md"
           shadow="lg"
         >
-          {areSearchResultsLoading || !searchResults ? (
+          {searchResultsInfo.isLoading ? (
             <Flex align="center" justify="center" h="192px">
               <Loading />
             </Flex>

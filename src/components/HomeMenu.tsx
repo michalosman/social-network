@@ -5,11 +5,11 @@ import { FaUserFriends } from 'react-icons/fa'
 import { MdGroups, MdKeyboardArrowDown } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 
-import useAuth from '../contexts/AuthContext'
+import useUser from '../hooks/useUser'
 import Avatar from './Avatar'
 
 function HomeMenu() {
-  const { user } = useAuth()
+  const { user } = useUser()
 
   return (
     <Flex direction="column" w="100%">

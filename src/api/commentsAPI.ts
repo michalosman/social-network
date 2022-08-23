@@ -6,7 +6,7 @@ const SERVER_URL =
 
 const api = axios.create({ baseURL: SERVER_URL, withCredentials: true })
 
-export const create = async (
+export const createComment = async (
   createCommentValues: CreateCommentValues
 ): Promise<Comment> => {
   const { postId, text } = createCommentValues
@@ -14,7 +14,7 @@ export const create = async (
   return data
 }
 
-export const get = async (postId: string) => {
+export const getComments = async (postId: string) => {
   const { data } = await api.get(`/${postId}`)
   return data
 }

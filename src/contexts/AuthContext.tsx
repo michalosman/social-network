@@ -1,16 +1,10 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
+import React, { createContext, useEffect, useMemo, useState } from 'react'
 
 import * as usersAPI from '../api/usersAPI'
 
 interface AuthContextType {
-  user: User
+  user: User | null
   error: any
   isLoading: boolean
   initialLoading: boolean
@@ -18,24 +12,12 @@ interface AuthContextType {
   register: (registerData: RegisterValues) => void
   login: (loginData: LoginValues) => void
   logout: () => void
-  logoutAll: () => void
 }
 
-const AuthContext = createContext<AuthContextType>({} as AuthContextType)
+export const AuthContext = createContext<AuthContextType>({} as AuthContextType)
 
-export const initialUser: User = {
-  id: '',
-  firstName: '',
-  lastName: '',
-  email: '',
-  image: '',
-  friends: [],
-  friendRequests: [],
-  posts: [],
-}
-
-export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User>(initialUser)
+function AuthProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<User | null>(null)
   const [error, setError] = useState<any>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [initialLoading, setInitialLoading] = useState<boolean>(true)
@@ -89,21 +71,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     try {
       await usersAPI.logout()
-      setUser(initialUser)
-    } catch (error: any) {
-      setError(error.response.data.error)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const logoutAll = async () => {
-    setError(null)
-    setIsLoading(true)
-
-    try {
-      await usersAPI.logoutAll()
-      setUser(initialUser)
+      setUser(null)
     } catch (error: any) {
       setError(error.response.data.error)
     } finally {
@@ -121,7 +89,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       register,
       login,
       logout,
-      logoutAll,
     }),
     [user, isLoading, initialLoading, error]
   )
@@ -129,6 +96,4 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
-export default function useAuth() {
-  return useContext(AuthContext)
-}
+export default AuthProvider

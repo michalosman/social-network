@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 import App from './App'
-import { AuthProvider } from './contexts/AuthContext'
+import AuthProvider from './contexts/AuthContext'
 import theme from './theme'
 
 const queryClient = new QueryClient()

@@ -20,11 +20,6 @@ export const logout = async (): Promise<User> => {
   return data
 }
 
-export const logoutAll = async (): Promise<User> => {
-  const { data } = await api.post('/logout/all')
-  return data
-}
-
 export const getSearched = async (
   searchData: SearchValues
 ): Promise<User[]> => {
@@ -45,7 +40,9 @@ export const getUser = async (userId: string): Promise<User> => {
   return data
 }
 
-export const update = async (updateData: UpdateUserValues): Promise<User> => {
+export const updateUser = async (
+  updateData: UpdateUserValues
+): Promise<User> => {
   const { data } = await api.patch(`/`, updateData)
   return data
 }

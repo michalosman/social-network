@@ -13,109 +13,26 @@ import {
   FaUserMinus,
   FaUserPlus,
 } from 'react-icons/fa'
-import { useMutation, useQuery, useQueryClient } from 'react-query'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-import * as postsAPI from '../api/postsAPI'
-import * as usersAPI from '../api/usersAPI'
 import Avatar from '../components/Avatar'
 import EditProfile from '../components/EditProfile'
 import PostList from '../components/PostList'
+import useFriendship from '../hooks/useFriendship'
+import useProfile from '../hooks/useProfile'
+import useUser from '../hooks/useUser'
+import checkFriendship from '../utils/checkFriendship'
 import ErrorPage from './ErrorPage'
 import LoadingPage from './LoadingPage'
 
 function ProfilePage() {
-  const queryClient = useQueryClient()
-  const { profileId } = useParams()
+  const { user } = useUser()
+  const { requestFriend, acceptFriend, rejectFriend, removeFriend } =
+    useFriendship()
+  const { profileUser, profileUserInfo, timeline, timelineInfo } = useProfile()
 
-  const { data: user } = useQuery<User>('user', usersAPI.getCurrentUser)
-
-  const {
-    data: profile,
-    isLoading: isProfileLoading,
-    error: profileError,
-  } = useQuery<User>(['profile', profileId], () => usersAPI.getUser(profileId!))
-
-  const { data: timeline, isLoading: isTimelineLoading } = useQuery<Post[]>(
-    ['timeline', profileId],
-    () =>
-      postsAPI.getTimeline({
-        userId: profileId!,
-        offset: 0,
-        limit: 10,
-      })
-  )
-
-  const { mutate: requestFriend } = useMutation(
-    () => usersAPI.requestFriend(profileId!),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('user')
-        queryClient.invalidateQueries('profile')
-      },
-    }
-  )
-
-  const { mutate: acceptFriend } = useMutation(
-    () => usersAPI.acceptFriend(profileId!),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('user')
-        queryClient.invalidateQueries('profile')
-      },
-    }
-  )
-
-  const { mutate: rejectFriend } = useMutation(
-    () => usersAPI.rejectFriend(profileId!),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('user')
-        queryClient.invalidateQueries('profile')
-      },
-    }
-  )
-
-  const { mutate: removeFriend } = useMutation(
-    () => usersAPI.removeFriend(profileId!),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('user')
-        queryClient.invalidateQueries('profile')
-      },
-    }
-  )
-
-  const checkFriendship = (currentUser: User, otherUser: User) => {
-    enum FriendshipStatus {
-      FRIENDS = 'friends',
-      NOT_FRIENDS = 'notFriends',
-      REQUEST_SENT = 'requestSent',
-      REQUEST_RECEIVED = 'requestReceived',
-    }
-
-    if (currentUser.friends.find((friend) => friend.id === otherUser.id))
-      return FriendshipStatus.FRIENDS
-
-    if (
-      currentUser.friendRequests.find(
-        (friendRequest) => friendRequest.id === otherUser.id
-      )
-    )
-      return FriendshipStatus.REQUEST_RECEIVED
-
-    if (
-      otherUser.friendRequests.find(
-        (friendRequest) => friendRequest.id === currentUser.id
-      )
-    )
-      return FriendshipStatus.REQUEST_SENT
-
-    return FriendshipStatus.NOT_FRIENDS
-  }
-
-  if (profileError) return <ErrorPage />
-  if (isProfileLoading || isTimelineLoading || !profile || !timeline || !user)
+  if (profileUserInfo.isError) return <ErrorPage />
+  if (profileUserInfo.isLoading || timelineInfo.isLoading)
     return <LoadingPage />
 
   return (
@@ -142,7 +59,7 @@ function ProfilePage() {
               <Avatar
                 size="176px"
                 border="4px solid white"
-                src={profile.image}
+                src={profileUser.image}
               />
               <Box
                 ml={{ base: 0, lg: 4 }}
@@ -151,54 +68,55 @@ function ProfilePage() {
                 <Text
                   fontSize="32px"
                   fontWeight="bold"
-                >{`${profile.firstName} ${profile.lastName}`}</Text>
+                >{`${profileUser.firstName} ${profileUser.lastName}`}</Text>
                 <Text color="gray.500" fontSize="16px" fontWeight="semibold">
-                  {`${profile.friends.length} friends`}
+                  {`${profileUser.friends.length} friends`}
                 </Text>
               </Box>
             </Flex>
             <Flex align="flex-end" justify="center" gap={2} mt={4} px={6}>
-              {user.id === profileId ? (
+              {user.id === profileUser.id ? (
                 <EditProfile />
               ) : (
                 <>
-                  {checkFriendship(user, profile) === 'notFriends' && (
+                  {checkFriendship(user, profileUser) === 'NOT_FRIENDS' && (
                     <Button
                       colorScheme="messenger"
                       leftIcon={<FaUserPlus />}
-                      onClick={() => requestFriend()}
+                      onClick={() => requestFriend(profileUser.id)}
                     >
                       Add friend
                     </Button>
                   )}
-                  {checkFriendship(user, profile) === 'friends' && (
+                  {checkFriendship(user, profileUser) === 'FRIENDS' && (
                     <Button
                       leftIcon={<FaUserMinus />}
-                      onClick={() => removeFriend()}
+                      onClick={() => removeFriend(profileUser.id)}
                       variant="gray"
                     >
                       Unfriend
                     </Button>
                   )}
-                  {checkFriendship(user, profile) === 'requestReceived' && (
+                  {checkFriendship(user, profileUser) ===
+                    'REQUEST_RECEIVED' && (
                     <>
                       <Button
                         colorScheme="whatsapp"
                         leftIcon={<FaUserPlus />}
-                        onClick={() => acceptFriend()}
+                        onClick={() => acceptFriend(profileUser.id)}
                       >
                         Accept invitation
                       </Button>
                       <Button
                         colorScheme="red"
                         leftIcon={<FaUserMinus />}
-                        onClick={() => rejectFriend()}
+                        onClick={() => rejectFriend(profileUser.id)}
                       >
                         Reject invitation
                       </Button>
                     </>
                   )}
-                  {checkFriendship(user, profile) === 'requestSent' && (
+                  {checkFriendship(user, profileUser) === 'REQUEST_SENT' && (
                     <Button
                       colorScheme="messenger"
                       disabled
@@ -239,14 +157,14 @@ function ProfilePage() {
           <Text
             color="gray.500"
             fontSize="17px"
-          >{`${profile.friends.length} friends`}</Text>
+          >{`${profileUser.friends.length} friends`}</Text>
           <Grid
             gap={4}
             templateColumns="repeat(3, 1fr)"
             w={{ base: 'none', lg: '490px' }}
             mt={3}
           >
-            {profile.friends.map((friend) => (
+            {profileUser.friends.map((friend) => (
               <GridItem key={friend.id}>
                 <Link to={`/profile/${friend.id}`}>
                   <Image
@@ -262,7 +180,7 @@ function ProfilePage() {
                     fontSize="13px"
                     fontWeight="semibold"
                     _hover={{ textDecoration: 'underline' }}
-                  >{`${profile.firstName} ${profile.lastName}`}</Text>
+                  >{`${profileUser.firstName} ${profileUser.lastName}`}</Text>
                 </Link>
               </GridItem>
             ))}
