@@ -15,13 +15,8 @@ interface AuthContextType {
   isLoading: boolean
   initialLoading: boolean
   setError: React.Dispatch<any>
-  register: (
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string
-  ) => void
-  login: (email: string, password: string) => void
+  register: (registerData: RegisterValues) => void
+  login: (loginData: LoginValues) => void
   logout: () => void
   logoutAll: () => void
 }
@@ -60,17 +55,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  const register = async (
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string
-  ) => {
+  const register = async (registerData: RegisterValues) => {
     setError(null)
     setIsLoading(true)
 
     try {
-      const user = await usersAPI.register(firstName, lastName, email, password)
+      const user = await usersAPI.register(registerData)
       setUser(user)
     } catch (error: any) {
       setError(error.response.data.error)
@@ -79,12 +69,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  const login = async (email: string, password: string) => {
+  const login = async (loginData: LoginValues) => {
     setError(null)
     setIsLoading(true)
 
     try {
-      const user = await usersAPI.login(email, password)
+      const user = await usersAPI.login(loginData)
       setUser(user)
     } catch (error: any) {
       setError(error.response.data.error)

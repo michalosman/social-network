@@ -7,6 +7,10 @@ import * as postAPI from '../api/postsAPI'
 import useAuth from '../contexts/AuthContext'
 import Avatar from './Avatar'
 
+interface CreatePostFormValues {
+  text: string
+}
+
 function PostForm() {
   const { user } = useAuth()
   const queryClient = useQueryClient()
@@ -18,7 +22,7 @@ function PostForm() {
     }
   )
 
-  const formik = useFormik<{ text: string }>({
+  const formik = useFormik<CreatePostFormValues>({
     initialValues: {
       text: '',
     },

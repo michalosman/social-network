@@ -11,23 +11,24 @@ interface CommentFormProps {
   postId: string
 }
 
+interface CreateCommentFormValues {
+  text: string
+}
+
 function CommentForm({ postId }: CommentFormProps) {
   const { user } = useAuth()
   const queryClient = useQueryClient()
 
-  const createCommentMutation = useMutation(
-    (text: string) => commentsAPI.create(postId, text),
-    {
-      onSuccess: () => queryClient.invalidateQueries(`comments${postId}`),
-    }
-  )
+  const createCommentMutation = useMutation(commentsAPI.create, {
+    onSuccess: () => queryClient.invalidateQueries(`comments${postId}`),
+  })
 
-  const formik = useFormik<{ text: string }>({
+  const formik = useFormik<CreateCommentFormValues>({
     initialValues: {
       text: '',
     },
     onSubmit: (values) => {
-      createCommentMutation.mutate(values.text)
+      createCommentMutation.mutate({ postId, ...values })
       formik.resetForm()
     },
   })

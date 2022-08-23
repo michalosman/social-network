@@ -6,22 +6,12 @@ const SERVER_URL =
 
 const api = axios.create({ baseURL: SERVER_URL, withCredentials: true })
 
-export const register = async (
-  firstName: string,
-  lastName: string,
-  email: string,
-  password: string
-): Promise<User> => {
-  const { data } = await api.post('/register', {
-    firstName,
-    lastName,
-    email,
-    password,
-  })
+export const register = async (registerData: RegisterValues): Promise<User> => {
+  const { data } = await api.post('/register', registerData)
   return data
 }
-export const login = async (email: string, password: string): Promise<User> => {
-  const { data } = await api.post('/login', { email, password })
+export const login = async (loginData: LoginValues): Promise<User> => {
+  const { data } = await api.post('/login', loginData)
   return data
 }
 
@@ -36,13 +26,11 @@ export const logoutAll = async (): Promise<User> => {
 }
 
 export const getSearched = async (
-  firstName: string,
-  lastName: string,
-  limit: number
+  searchData: SearchValues
 ): Promise<User[]> => {
-  if (!firstName) return []
+  if (!searchData.firstName) return []
   const { data } = await api.get('/search', {
-    params: { firstName, lastName, limit },
+    params: searchData,
   })
   return data
 }
@@ -57,14 +45,8 @@ export const getUser = async (userId: string): Promise<User> => {
   return data
 }
 
-export const update = async (updatedFields: {
-  firstName?: string
-  lastName?: string
-  email?: string
-  password?: string
-  image?: string
-}): Promise<User> => {
-  const { data } = await api.patch(`/`, updatedFields)
+export const update = async (updateData: UpdateUserValues): Promise<User> => {
+  const { data } = await api.patch(`/`, updateData)
   return data
 }
 

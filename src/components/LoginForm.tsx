@@ -4,15 +4,15 @@ import * as Yup from 'yup'
 
 import useAuth from '../contexts/AuthContext'
 
-interface SignInFormValues {
+interface LoginFormValues {
   email: string
   password: string
 }
 
-function SignInForm() {
+function LoginForm() {
   const { login, error, setError } = useAuth()
 
-  const formik = useFormik<SignInFormValues>({
+  const formik = useFormik<LoginFormValues>({
     initialValues: {
       email: '',
       password: '',
@@ -23,7 +23,7 @@ function SignInForm() {
         .matches(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Email is invalid'),
       password: Yup.string().required('Password is required'),
     }),
-    onSubmit: (values) => login(values.email, values.password),
+    onSubmit: (values) => login(values),
   })
 
   return (
@@ -94,4 +94,4 @@ function SignInForm() {
   )
 }
 
-export default SignInForm
+export default LoginForm

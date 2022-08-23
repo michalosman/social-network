@@ -20,7 +20,7 @@ function App() {
       <Routes>
         <Route path="*" element={<ErrorPage />} />
         <Route path="/" element={<HomePage />} />
-        <Route path="/profile/:userId" element={<ProfilePage />} />
+        <Route path="/profile/:profileId" element={<ProfilePage />} />
       </Routes>
     </BrowserRouter>
   )

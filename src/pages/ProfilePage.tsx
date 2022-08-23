@@ -7,7 +7,6 @@ import {
   Image,
   Text,
 } from '@chakra-ui/react'
-import { useState } from 'react'
 import {
   FaCheck,
   FaFacebookMessenger,
@@ -22,91 +21,91 @@ import * as usersAPI from '../api/usersAPI'
 import Avatar from '../components/Avatar'
 import EditProfile from '../components/EditProfile'
 import PostList from '../components/PostList'
-import useAuth from '../contexts/AuthContext'
 import ErrorPage from './ErrorPage'
 import LoadingPage from './LoadingPage'
 
-enum FriendshipStatus {
-  FRIENDS = 'friends',
-  NOT_FRIENDS = 'notFriends',
-  REQUEST_SENT = 'requestSent',
-  REQUEST_RECEIVED = 'requestReceived',
-  UNSET = 'unset',
-}
-
 function ProfilePage() {
-  const { user } = useAuth()
-  const { userId } = useParams()
   const queryClient = useQueryClient()
-  const [friendshipStatus, setFriendshipStatus] = useState<FriendshipStatus>(
-    FriendshipStatus.UNSET
-  )
+  const { profileId } = useParams()
+
+  const { data: user } = useQuery<User>('user', usersAPI.getCurrentUser)
 
   const {
     data: profile,
     isLoading: isProfileLoading,
-    error: userError,
-    isFetched: isProfileFetched,
-  } = useQuery<User>(['profile', userId], () => usersAPI.getUser(userId!))
+    error: profileError,
+  } = useQuery<User>(['profile', profileId], () => usersAPI.getUser(profileId!))
 
   const { data: timeline, isLoading: isTimelineLoading } = useQuery<Post[]>(
-    ['timeline', userId],
-    () => postsAPI.getTimeline(userId!, 0, 100)
+    ['timeline', profileId],
+    () =>
+      postsAPI.getTimeline({
+        userId: profileId!,
+        offset: 0,
+        limit: 10,
+      })
   )
 
-  const requestFriendMutation = useMutation(
-    () => usersAPI.requestFriend(userId!),
+  const { mutate: requestFriend } = useMutation(
+    () => usersAPI.requestFriend(profileId!),
     {
       onSuccess: () => {
+        queryClient.invalidateQueries('user')
         queryClient.invalidateQueries('profile')
-        setFriendshipStatus(FriendshipStatus.REQUEST_SENT)
       },
     }
   )
 
-  const acceptFriendMutation = useMutation(
-    () => usersAPI.acceptFriend(userId!),
+  const { mutate: acceptFriend } = useMutation(
+    () => usersAPI.acceptFriend(profileId!),
     {
       onSuccess: () => {
+        queryClient.invalidateQueries('user')
         queryClient.invalidateQueries('profile')
-        setFriendshipStatus(FriendshipStatus.FRIENDS)
       },
     }
   )
 
-  const rejectFriendMutation = useMutation(
-    () => usersAPI.rejectFriend(userId!),
+  const { mutate: rejectFriend } = useMutation(
+    () => usersAPI.rejectFriend(profileId!),
     {
       onSuccess: () => {
+        queryClient.invalidateQueries('user')
         queryClient.invalidateQueries('profile')
-        setFriendshipStatus(FriendshipStatus.NOT_FRIENDS)
       },
     }
   )
 
-  const removeFriendMutation = useMutation(
-    () => usersAPI.removeFriend(userId!),
+  const { mutate: removeFriend } = useMutation(
+    () => usersAPI.removeFriend(profileId!),
     {
       onSuccess: () => {
+        queryClient.invalidateQueries('user')
         queryClient.invalidateQueries('profile')
-        setFriendshipStatus(FriendshipStatus.NOT_FRIENDS)
       },
     }
   )
 
-  const checkInitialFriendship = (currentUser: User, profileUser: User) => {
-    if (currentUser.friends.find((friend) => friend.id === profileUser.id))
+  const checkFriendship = (currentUser: User, otherUser: User) => {
+    enum FriendshipStatus {
+      FRIENDS = 'friends',
+      NOT_FRIENDS = 'notFriends',
+      REQUEST_SENT = 'requestSent',
+      REQUEST_RECEIVED = 'requestReceived',
+    }
+
+    if (currentUser.friends.find((friend) => friend.id === otherUser.id))
       return FriendshipStatus.FRIENDS
 
     if (
       currentUser.friendRequests.find(
-        (friendRequest) => friendRequest.id === profileUser.id
+        (friendRequest) => friendRequest.id === otherUser.id
       )
     )
       return FriendshipStatus.REQUEST_RECEIVED
 
     if (
-      profileUser.friendRequests.find(
+      otherUser.friendRequests.find(
         (friendRequest) => friendRequest.id === currentUser.id
       )
     )
@@ -115,12 +114,8 @@ function ProfilePage() {
     return FriendshipStatus.NOT_FRIENDS
   }
 
-  if (isProfileFetched && friendshipStatus === FriendshipStatus.UNSET) {
-    setFriendshipStatus(checkInitialFriendship(user, profile!))
-  }
-
-  if (userError) return <ErrorPage />
-  if (isProfileLoading || isTimelineLoading || !profile || !timeline)
+  if (profileError) return <ErrorPage />
+  if (isProfileLoading || isTimelineLoading || !profile || !timeline || !user)
     return <LoadingPage />
 
   return (
@@ -163,47 +158,47 @@ function ProfilePage() {
               </Box>
             </Flex>
             <Flex align="flex-end" justify="center" gap={2} mt={4} px={6}>
-              {user.id === userId ? (
+              {user.id === profileId ? (
                 <EditProfile />
               ) : (
                 <>
-                  {friendshipStatus === FriendshipStatus.NOT_FRIENDS && (
+                  {checkFriendship(user, profile) === 'notFriends' && (
                     <Button
                       colorScheme="messenger"
                       leftIcon={<FaUserPlus />}
-                      onClick={() => requestFriendMutation.mutate()}
+                      onClick={() => requestFriend()}
                     >
                       Add friend
                     </Button>
                   )}
-                  {friendshipStatus === FriendshipStatus.FRIENDS && (
+                  {checkFriendship(user, profile) === 'friends' && (
                     <Button
                       leftIcon={<FaUserMinus />}
-                      onClick={() => removeFriendMutation.mutate()}
+                      onClick={() => removeFriend()}
                       variant="gray"
                     >
                       Unfriend
                     </Button>
                   )}
-                  {friendshipStatus === FriendshipStatus.REQUEST_RECEIVED && (
+                  {checkFriendship(user, profile) === 'requestReceived' && (
                     <>
                       <Button
                         colorScheme="whatsapp"
                         leftIcon={<FaUserPlus />}
-                        onClick={() => acceptFriendMutation.mutate()}
+                        onClick={() => acceptFriend()}
                       >
                         Accept invitation
                       </Button>
                       <Button
                         colorScheme="red"
                         leftIcon={<FaUserMinus />}
-                        onClick={() => rejectFriendMutation.mutate()}
+                        onClick={() => rejectFriend()}
                       >
                         Reject invitation
                       </Button>
                     </>
                   )}
-                  {friendshipStatus === FriendshipStatus.REQUEST_SENT && (
+                  {checkFriendship(user, profile) === 'requestSent' && (
                     <Button
                       colorScheme="messenger"
                       disabled

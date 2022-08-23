@@ -14,7 +14,11 @@ function HomePage() {
 
   const { data: feed, isLoading: isFeedLoading } = useQuery<Post[]>(
     'posts',
-    () => postsAPI.getFeed(0, 10)
+    () =>
+      postsAPI.getFeed({
+        offset: 0,
+        limit: 10,
+      })
   )
 
   if (isFeedLoading) return <div />

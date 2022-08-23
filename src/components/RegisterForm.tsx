@@ -4,17 +4,17 @@ import * as Yup from 'yup'
 
 import useAuth from '../contexts/AuthContext'
 
-interface SignUpFormValues {
+interface RegisterFormValues {
   firstName: string
   lastName: string
   email: string
   password: string
 }
 
-function SignUpForm() {
+function RegisterForm() {
   const { register, error, setError } = useAuth()
 
-  const formik = useFormik<SignUpFormValues>({
+  const formik = useFormik<RegisterFormValues>({
     initialValues: {
       firstName: '',
       lastName: '',
@@ -36,13 +36,7 @@ function SignUpForm() {
         .min(6, 'Must be between 6 and 30 characters')
         .max(30, 'Must be between 6 and 30 characters'),
     }),
-    onSubmit: (values) =>
-      register(
-        values.firstName,
-        values.lastName,
-        values.email,
-        values.password
-      ),
+    onSubmit: (values) => register(values),
   })
 
   return (
@@ -141,4 +135,4 @@ function SignUpForm() {
   )
 }
 
-export default SignUpForm
+export default RegisterForm

@@ -25,7 +25,11 @@ function NavSearch() {
     User[]
   >(['searchResults', searchPhrase], () => {
     const [firstName, lastName] = searchPhrase.trim().split(' ')
-    return usersAPI.getSearched(firstName, lastName, 10)
+    return usersAPI.getSearched({
+      firstName,
+      lastName,
+      limit: 10,
+    })
   })
 
   return (

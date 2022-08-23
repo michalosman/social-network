@@ -11,19 +11,15 @@ export const create = async (text: string): Promise<Post> => {
   return data
 }
 
-export const getFeed = async (
-  offset: number,
-  limit: number
-): Promise<Post[]> => {
-  const { data } = await api.get('/feed', { params: { offset, limit } })
+export const getFeed = async (feedData: FeedValues): Promise<Post[]> => {
+  const { data } = await api.get('/feed', { params: feedData })
   return data
 }
 
 export const getTimeline = async (
-  userId: string,
-  offset: number,
-  limit: number
+  timelineData: TimelineValues
 ): Promise<Post[]> => {
+  const { userId, offset, limit } = timelineData
   const { data } = await api.get(`/timeline/${userId}`, {
     params: { offset, limit },
   })

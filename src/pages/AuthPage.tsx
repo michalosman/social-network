@@ -9,11 +9,11 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 
-import SignInForm from '../components/SignInForm'
-import SignUpForm from '../components/SignUpForm'
+import LoginForm from '../components/LoginForm'
+import RegisterForm from '../components/RegisterForm'
 
 function AuthPage() {
-  const [isSignIn, setIsSignIn] = useState(true)
+  const [isLogin, setIsLogin] = useState(true)
 
   return (
     <Container
@@ -60,7 +60,7 @@ function AuthPage() {
           borderRadius="lg"
           shadow="xl"
         >
-          {isSignIn ? <SignInForm /> : <SignUpForm />}
+          {isLogin ? <LoginForm /> : <RegisterForm />}
           <Link
             color="messenger.500"
             fontSize="14px"
@@ -74,10 +74,10 @@ function AuthPage() {
             <Button
               mb={3}
               colorScheme="whatsapp"
-              onClick={() => setIsSignIn(!isSignIn)}
+              onClick={() => setIsLogin(!isLogin)}
               size="lg"
             >
-              {isSignIn ? 'Create new account' : 'Log in with your account'}
+              {isLogin ? 'Create new account' : 'Log in with your account'}
             </Button>
           </Flex>
         </Flex>
