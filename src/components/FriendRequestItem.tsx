@@ -10,11 +10,11 @@ interface FriendRequestItemProps {
 function FriendRequestItem({ friendRequest }: FriendRequestItemProps) {
   return (
     <Flex key={friendRequest.id} align="center" gap={3} p={2}>
-      <Link to="profile/1">
+      <Link to={`profile/${friendRequest.id}`}>
         <Avatar size="60px" src={friendRequest.image} hover />
       </Link>
       <Flex direction="column" gap={2}>
-        <Link to="profile/1">
+        <Link to={`profile/${friendRequest.id}`}>
           <Text
             fontSize="15px"
             fontWeight="semibold"

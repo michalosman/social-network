@@ -30,7 +30,7 @@ function PostForm() {
 
   return (
     <Flex gap={2} w="100%" p={4} bg="white" borderRadius="md" shadow="base">
-      <Link to="profile/1">
+      <Link to={`profile/${user.id}`}>
         <Avatar src={user.image} hover />
       </Link>
       <form onSubmit={formik.handleSubmit} style={{ flex: 1 }}>

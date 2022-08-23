@@ -9,7 +9,7 @@ interface FriendItemProps {
 
 function FriendItem({ friend }: FriendItemProps) {
   return (
-    <Link to="profile/1" key={friend.id}>
+    <Link to={`profile/${friend.id}`} key={friend.id}>
       <Button w="100%" py={6} variant="left">
         <Avatar size="36px" src={friend.image} />
         <Text
