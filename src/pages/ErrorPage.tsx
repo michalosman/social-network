@@ -1,9 +1,6 @@
 import { Button, Flex, Text } from '@chakra-ui/react'
-import { useNavigate } from 'react-router-dom'
 
 function ErrorPage() {
-  const navigate = useNavigate()
-
   return (
     <Flex align="center" justify="center" direction="column" h="100vh">
       <Text fontSize="20px" fontWeight="bold">
@@ -13,8 +10,8 @@ function ErrorPage() {
         The link may be broken, or the page may have been removed. Check to see
         if the link you`re trying to open is correct.
       </Text>
-      <Button colorScheme="messenger" onClick={() => navigate('/')} size="lg">
-        Go to Home Page
+      <Button colorScheme="messenger" size="lg">
+        <a href="/">Go to Home Page</a>
       </Button>
     </Flex>
   )

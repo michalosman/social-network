@@ -14,11 +14,6 @@ interface CreatePostValues {
   image: string
 }
 
-interface FeedValues {
-  offset: number
-  limit: number
-}
-
 interface TimelineValues {
   userId: string
   page: number

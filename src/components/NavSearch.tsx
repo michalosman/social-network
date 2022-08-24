@@ -29,6 +29,7 @@ function NavSearch() {
         </InputLeftElement>
         <Input
           maxW="240px"
+          onBlur={() => setTimeout(() => setSearchPhrase(''), 100)}
           onChange={(e) => setSearchPhrase(e.target.value)}
           placeholder="Search Facebook"
           type="text"
