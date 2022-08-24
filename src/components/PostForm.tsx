@@ -8,6 +8,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { useFormik } from 'formik'
+import { useState } from 'react'
 import { IoMdImages } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 
@@ -29,14 +30,15 @@ function PostForm() {
     onOpen: openPhotoInput,
     onClose: closePhotoInput,
   } = useDisclosure()
+  const [imageUploading, setImageUploading] = useState<boolean>(false)
 
   const formik = useFormik<CreatePostFormValues>({
     initialValues: {
       text: '',
       image: '',
     },
-    onSubmit: (values) => {
-      if (values.text === '' && values.image === '') return
+    onSubmit: async (values) => {
+      if ((values.text === '' && values.image === '') || imageUploading) return
       createPost(values)
       closePhotoInput()
       formik.resetForm({
@@ -50,7 +52,9 @@ function PostForm() {
 
   const uploadImage = async (files: FileList | null) => {
     if (!files) return
+    setImageUploading(true)
     const imageUrl = await cloudinaryAPI.uploadImage(files[0])
+    setImageUploading(false)
     formik.values.image = imageUrl
   }
 
@@ -95,6 +99,7 @@ function PostForm() {
             <Button
               w="50%"
               colorScheme="whatsapp"
+              disabled={imageUploading}
               onClick={() => formik.handleSubmit()}
             >
               Add post

@@ -14,6 +14,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { useFormik } from 'formik'
+import { useState } from 'react'
 import { MdModeEditOutline } from 'react-icons/md'
 import * as Yup from 'yup'
 
@@ -31,6 +32,7 @@ interface EditProfileFormValues {
 function EditProfile() {
   const { user, updateUser } = useUser()
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const [imageUploading, setImageUploading] = useState<boolean>(false)
 
   const formik = useFormik<EditProfileFormValues>({
     initialValues: {
@@ -52,6 +54,8 @@ function EditProfile() {
         .max(30, 'Must be between 6 and 30 characters'),
     }),
     onSubmit: (values) => {
+      if (imageUploading) return
+
       let key: keyof EditProfileFormValues
       const updatedFields: EditProfileFormValues = {} as EditProfileFormValues
 
@@ -77,7 +81,9 @@ function EditProfile() {
 
   const uploadImage = async (files: FileList | null) => {
     if (!files) return
+    setImageUploading(true)
     const imageUrl = await cloudinaryAPI.uploadImage(files[0])
+    setImageUploading(false)
     formik.values.image = imageUrl
   }
 
@@ -193,7 +199,12 @@ function EditProfile() {
               </FormControl>
             </ModalBody>
             <ModalFooter>
-              <Button mr={3} colorScheme="messenger" type="submit">
+              <Button
+                mr={3}
+                colorScheme="messenger"
+                disabled={imageUploading}
+                type="submit"
+              >
                 Save
               </Button>
               <Button
