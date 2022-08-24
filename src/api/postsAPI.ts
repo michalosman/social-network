@@ -6,19 +6,17 @@ const SERVER_URL =
 
 const api = axios.create({ baseURL: SERVER_URL, withCredentials: true })
 
-export const createPost = async (text: string): Promise<Post> => {
-  const { data } = await api.post('/', { text })
+const createPost = async (createPostData: CreatePostValues): Promise<Post> => {
+  const { data } = await api.post('/', createPostData)
   return data
 }
 
-export const getFeed = async (feedData: FeedValues): Promise<Post[]> => {
+const getFeed = async (feedData: FeedValues): Promise<Post[]> => {
   const { data } = await api.get('/feed', { params: feedData })
   return data
 }
 
-export const getTimeline = async (
-  timelineData: TimelineValues
-): Promise<Post[]> => {
+const getTimeline = async (timelineData: TimelineValues): Promise<Post[]> => {
   const { userId, offset, limit } = timelineData
   const { data } = await api.get(`/timeline/${userId}`, {
     params: { offset, limit },
@@ -26,12 +24,16 @@ export const getTimeline = async (
   return data
 }
 
-export const likePost = async (postId: string): Promise<Post> => {
+const likePost = async (postId: string): Promise<Post> => {
   const { data } = await api.patch(`/${postId}/like`)
   return data
 }
 
-export const unlikePost = async (postId: string): Promise<Post> => {
+const unlikePost = async (postId: string): Promise<Post> => {
   const { data } = await api.patch(`/${postId}/unlike`)
   return data
 }
+
+const postsAPI = { createPost, getFeed, getTimeline, likePost, unlikePost }
+
+export default postsAPI

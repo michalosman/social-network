@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 
-import * as commentsAPI from '../api/commentsAPI'
+import commentsAPI from '../api/commentsAPI'
 
 const useComment = (postId: string) => {
   const queryClient = useQueryClient()

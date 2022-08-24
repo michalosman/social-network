@@ -1,16 +1,13 @@
 import { useMutation, useQueryClient } from 'react-query'
 
-import * as postsAPI from '../api/postsAPI'
+import postsAPI from '../api/postsAPI'
 
 const usePost = () => {
   const queryClient = useQueryClient()
 
-  const { mutate: createPost } = useMutation(
-    (text: string) => postsAPI.createPost(text),
-    {
-      onSuccess: () => queryClient.invalidateQueries('feed'),
-    }
-  )
+  const { mutate: createPost } = useMutation(postsAPI.createPost, {
+    onSuccess: () => queryClient.invalidateQueries('feed'),
+  })
 
   const { mutate: likePost } = useMutation(
     (postId: string) => postsAPI.likePost(postId),

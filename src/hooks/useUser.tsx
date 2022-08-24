@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { useParams } from 'react-router-dom'
 
-import * as postsAPI from '../api/postsAPI'
-import * as usersAPI from '../api/usersAPI'
+import postsAPI from '../api/postsAPI'
+import usersAPI from '../api/usersAPI'
 import defaultUser from '../utils/defaultValues'
 
 const useUser = () => {
@@ -21,17 +21,14 @@ const useUser = () => {
     })
   )
 
-  const { mutate: updateUser } = useMutation(
-    (updatedFields: UpdateUserValues) => usersAPI.updateUser(updatedFields),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('profile')
-        if (profileId && user && profileId === user.id) {
-          queryClient.invalidateQueries('user')
-        }
-      },
-    }
-  )
+  const { mutate: updateUser } = useMutation(usersAPI.updateUser, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('profile')
+      if (profileId && user && profileId === user.id) {
+        queryClient.invalidateQueries('user')
+      }
+    },
+  })
 
   return {
     user: user || defaultUser,

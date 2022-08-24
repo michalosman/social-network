@@ -17,6 +17,7 @@ import { useFormik } from 'formik'
 import { MdModeEditOutline } from 'react-icons/md'
 import * as Yup from 'yup'
 
+import cloudinaryAPI from '../api/cloudinaryAPI'
 import useUser from '../hooks/useUser'
 
 interface EditProfileFormValues {
@@ -28,7 +29,7 @@ interface EditProfileFormValues {
 }
 
 function EditProfile() {
-  const { user, updateUser: update } = useUser()
+  const { user, updateUser } = useUser()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const formik = useFormik<EditProfileFormValues>({
@@ -60,11 +61,25 @@ function EditProfile() {
         }
       }
 
-      update(updatedFields)
-      formik.resetForm()
+      updateUser(updatedFields)
       onClose()
+      formik.resetForm({
+        values: {
+          firstName: '',
+          lastName: '',
+          email: '',
+          password: '',
+          image: '',
+        },
+      })
     },
   })
+
+  const uploadImage = async (files: FileList | null) => {
+    if (!files) return
+    const imageUrl = await cloudinaryAPI.uploadImage(files[0])
+    formik.values.image = imageUrl
+  }
 
   return (
     <div>
@@ -94,11 +109,11 @@ function EditProfile() {
                 <FormLabel>Profile Picture</FormLabel>
                 <Input
                   p={1}
+                  accept="image/*"
                   id="image"
                   name="image"
-                  onChange={formik.handleChange}
+                  onChange={(e) => uploadImage(e.target.files)}
                   type="file"
-                  value={formik.values.image}
                 />
               </FormControl>
               <FormControl

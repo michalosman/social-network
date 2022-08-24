@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query'
 
-import * as usersAPI from '../api/usersAPI'
+import usersAPI from '../api/usersAPI'
 
 const useSearch = (searchPhrase: string) => {
   const { data: searchResults, ...searchResultsInfo } = useQuery<User[]>(

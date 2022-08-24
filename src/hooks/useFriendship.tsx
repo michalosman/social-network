@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from 'react-query'
 import { useParams } from 'react-router-dom'
 
-import * as usersAPI from '../api/usersAPI'
+import usersAPI from '../api/usersAPI'
 
 const useFriendship = () => {
   const queryClient = useQueryClient()

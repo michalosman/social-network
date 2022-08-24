@@ -3,6 +3,7 @@ import {
   Button,
   Divider,
   Flex,
+  Image,
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
@@ -30,8 +31,8 @@ function PostItem({ post }: PostItemProps) {
   }
 
   return (
-    <Box p={4} pb={1} bg="white" borderRadius="md" shadow="base">
-      <Flex gap={2} role="group">
+    <Box pb={1} bg="white" borderRadius="md" shadow="base">
+      <Flex gap={2} pt={3} pb={2} px={4} role="group">
         <Link to={`/profile/${post.author.id}`}>
           <Avatar src={post.author.image} hover />
         </Link>
@@ -49,9 +50,14 @@ function PostItem({ post }: PostItemProps) {
           </Text>
         </div>
       </Flex>
-      <Text mt={2}>{post.text}</Text>
-      <Flex align="center" justify="space-between">
-        <Flex align="center" mt={2}>
+      {post.text && (
+        <Box px={4}>
+          <Text>{post.text}</Text>
+        </Box>
+      )}
+      {post.image && <Image w="100%" mt={2.5} src={post.image} />}
+      <Flex align="center" justify="space-between" px={4} py={2.5}>
+        <Flex align="center">
           <Box boxSize="21px" p={1} bg="blue.400" rounded="full">
             <FaThumbsUp fontSize="12px" color="white" />
           </Box>
@@ -68,33 +74,39 @@ function PostItem({ post }: PostItemProps) {
           {post.comments.length} Comments
         </Text>
       </Flex>
-      <Divider mt={2} mb={1} />
-      <Button
-        w="50%"
-        color={isAlreadyLiked() ? 'messenger.500' : 'gray.600'}
-        leftIcon={isAlreadyLiked() ? <FaThumbsUp /> : <FaRegThumbsUp />}
-        onClick={
-          isAlreadyLiked() ? () => unlikePost(post.id) : () => likePost(post.id)
-        }
-        variant="ghost"
-      >
-        <Text color={isAlreadyLiked() ? 'messenger.500' : 'default'}>Like</Text>
-      </Button>
-      <Button
-        w="50%"
-        color="gray.600"
-        leftIcon={
-          <Box mt={1}>
-            <FaRegCommentAlt />
-          </Box>
-        }
-        onClick={toggleCommentsOpen}
-        variant="ghost"
-      >
-        Comment
-      </Button>
+      <Box px={4}>
+        <Divider mb={1} />
+        <Button
+          w="50%"
+          color={isAlreadyLiked() ? 'messenger.500' : 'gray.600'}
+          leftIcon={isAlreadyLiked() ? <FaThumbsUp /> : <FaRegThumbsUp />}
+          onClick={
+            isAlreadyLiked()
+              ? () => unlikePost(post.id)
+              : () => likePost(post.id)
+          }
+          variant="ghost"
+        >
+          <Text color={isAlreadyLiked() ? 'messenger.500' : 'default'}>
+            Like
+          </Text>
+        </Button>
+        <Button
+          w="50%"
+          color="gray.600"
+          leftIcon={
+            <Box mt={1}>
+              <FaRegCommentAlt />
+            </Box>
+          }
+          onClick={toggleCommentsOpen}
+          variant="ghost"
+        >
+          Comment
+        </Button>
+      </Box>
       {commentsOpen && (
-        <Flex direction="column">
+        <Flex direction="column" px={4}>
           <Divider mt={1} mb={4} />
           <CommentForm postId={post.id} />
           <CommentList postId={post.id} />

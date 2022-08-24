@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import React, { createContext, useEffect, useMemo, useState } from 'react'
 
-import * as usersAPI from '../api/usersAPI'
+import usersAPI from '../api/usersAPI'
 
 interface AuthContextType {
   user: User | null
