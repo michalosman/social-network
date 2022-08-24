@@ -1,12 +1,4 @@
-import {
-  Button,
-  Container,
-  Divider,
-  Flex,
-  Image,
-  Link,
-  Text,
-} from '@chakra-ui/react'
+import { Button, Container, Divider, Flex, Link, Text } from '@chakra-ui/react'
 import { useState } from 'react'
 
 import LoginForm from '../components/LoginForm'
@@ -29,16 +21,20 @@ function AuthPage() {
         <Flex
           align={{ base: 'center', lg: 'flex-start' }}
           direction="column"
-          mt={{ base: 0, lg: '24px' }}
+          mt={{ base: 0, lg: '36px' }}
         >
-          <Image
-            w="301px"
-            mt={3}
-            mb={-2}
-            ml={{ base: 0, lg: '-28px' }}
-            alt="Facebook logo"
-            src="https://static.xx.fbcdn.net/rsrc.php/y8/r/dF5SId3UHWd.svg"
-          />
+          <Text
+            align={{ base: 'center', lg: 'left' }}
+            mt={{ base: '30px', lg: '8px' }}
+            mb={{ base: '12px', lg: 0 }}
+            color="messenger.500"
+            fontFamily="-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif"
+            fontSize={{ base: '48px', lg: '60px' }}
+            fontWeight="bold"
+            letterSpacing="-3px"
+          >
+            facebook clone
+          </Text>
           <Text
             align={{ base: 'center', lg: 'left' }}
             maxW={{ base: '400px', lg: '500px' }}

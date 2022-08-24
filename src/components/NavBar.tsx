@@ -23,7 +23,7 @@ function NavBar() {
         py={2}
       >
         <Flex gap={2}>
-          <a href="/">
+          <a href="/" title="Facebook, Public domain, via Wikimedia Commons">
             <Image
               w="40px"
               alt="Facebook logo"
