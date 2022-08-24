@@ -7,16 +7,19 @@ import {
   Image,
   Text,
 } from '@chakra-ui/react'
+import { useEffect } from 'react'
 import {
   FaCheck,
   FaFacebookMessenger,
   FaUserMinus,
   FaUserPlus,
 } from 'react-icons/fa'
+import { useInView } from 'react-intersection-observer'
 import { Link } from 'react-router-dom'
 
 import Avatar from '../components/Avatar'
 import EditProfile from '../components/EditProfile'
+import Loading from '../components/Loading'
 import PostList from '../components/PostList'
 import useFriendship from '../hooks/useFriendship'
 import useProfile from '../hooks/useProfile'
@@ -30,6 +33,13 @@ function ProfilePage() {
   const { requestFriend, acceptFriend, rejectFriend, removeFriend } =
     useFriendship()
   const { profileUser, profileUserInfo, timeline, timelineInfo } = useProfile()
+  const { ref, inView } = useInView()
+
+  useEffect(() => {
+    if (inView) {
+      timelineInfo.fetchNextPage()
+    }
+  }, [inView])
 
   if (profileUserInfo.isError) return <ErrorPage />
   if (profileUserInfo.isLoading || timelineInfo.isLoading)
@@ -188,6 +198,15 @@ function ProfilePage() {
         </Flex>
         <Flex direction="column" flex={1} gap={4}>
           <PostList posts={timeline} />
+          {timelineInfo.isFetchingNextPage && timelineInfo.hasNextPage && (
+            <Loading />
+          )}
+          {!timelineInfo.hasNextPage && timeline.length !== 0 && (
+            <Text align="center" color="gray.600" fontWeight="semibold">
+              No more posts to show
+            </Text>
+          )}
+          <div ref={ref} />
         </Flex>
       </Flex>
     </>

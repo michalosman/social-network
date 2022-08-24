@@ -11,15 +11,23 @@ const createPost = async (createPostData: CreatePostValues): Promise<Post> => {
   return data
 }
 
-const getFeed = async (feedData: FeedValues): Promise<Post[]> => {
-  const { data } = await api.get('/feed', { params: feedData })
+const getFeed = async (page: number): Promise<Post[]> => {
+  const { data } = await api.get('/feed', {
+    params: {
+      offset: (page - 1) * 10,
+      limit: 10,
+    },
+  })
   return data
 }
 
 const getTimeline = async (timelineData: TimelineValues): Promise<Post[]> => {
-  const { userId, offset, limit } = timelineData
+  const { userId, page } = timelineData
   const { data } = await api.get(`/timeline/${userId}`, {
-    params: { offset, limit },
+    params: {
+      offset: (page - 1) * 10,
+      limit: 10,
+    },
   })
   return data
 }

@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from 'react-query'
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from 'react-query'
 import { useParams } from 'react-router-dom'
 
 import postsAPI from '../api/postsAPI'
@@ -14,11 +19,16 @@ const useUser = () => {
     usersAPI.getCurrentUser
   )
 
-  const { data: feed, ...feedInfo } = useQuery<Post[]>('feed', () =>
-    postsAPI.getFeed({
-      offset: 0,
-      limit: 10,
-    })
+  const { data: feed, ...feedInfo } = useInfiniteQuery<Post[]>(
+    'feed',
+    ({ pageParam = 1 }) => postsAPI.getFeed(pageParam),
+    {
+      getNextPageParam: (lastPage, allPages) => {
+        if (lastPage.length === 0) return undefined
+        const nextPage = allPages.length + 1
+        return nextPage
+      },
+    }
   )
 
   const { mutate: updateUser } = useMutation(usersAPI.updateUser, {
@@ -33,7 +43,7 @@ const useUser = () => {
   return {
     user: user || defaultUser,
     userInfo,
-    feed: feed || [],
+    feed: feed?.pages.flat() || [],
     feedInfo,
     updateUser,
   }

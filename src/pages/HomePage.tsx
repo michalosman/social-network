@@ -1,22 +1,34 @@
-import { Box, Flex } from '@chakra-ui/react'
+import { Box, Flex, Text } from '@chakra-ui/react'
+import { useEffect } from 'react'
+import { useInView } from 'react-intersection-observer'
 
 import FriendList from '../components/FriendList'
 import FriendRequestList from '../components/FriendRequestList'
 import HomeMenu from '../components/HomeMenu'
+import Loading from '../components/Loading'
 import PostForm from '../components/PostForm'
 import PostList from '../components/PostList'
 import useUser from '../hooks/useUser'
+import LoadingPage from './LoadingPage'
 
 function HomePage() {
   const { user, feed, feedInfo } = useUser()
+  const { ref, inView } = useInView()
 
-  if (feedInfo.isLoading) return <div />
+  useEffect(() => {
+    if (inView) {
+      feedInfo.fetchNextPage()
+    }
+  }, [inView])
+
+  if (feedInfo.isLoading) return <LoadingPage />
 
   return (
     <Flex
       justify={{ base: 'center', lg: 'space-between' }}
       maxW="1920px"
       mt="56px"
+      mb="100px"
       mx="auto"
     >
       <Box
@@ -40,6 +52,13 @@ function HomePage() {
       >
         <PostForm />
         <PostList posts={feed} />
+        {feedInfo.isFetchingNextPage && feedInfo.hasNextPage && <Loading />}
+        {!feedInfo.hasNextPage && feed.length !== 0 && (
+          <Text align="center" color="gray.600" fontWeight="semibold">
+            No more posts to show
+          </Text>
+        )}
+        <div ref={ref} />
       </Flex>
       <Box
         as="aside"

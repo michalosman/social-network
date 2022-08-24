@@ -21,6 +21,5 @@ interface FeedValues {
 
 interface TimelineValues {
   userId: string
-  offset: number
-  limit: number
+  page: number
 }

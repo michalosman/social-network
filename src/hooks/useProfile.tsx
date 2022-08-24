@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query'
+import { useInfiniteQuery, useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
 
 import postsAPI from '../api/postsAPI'
@@ -13,20 +13,26 @@ const useProfile = () => {
     () => usersAPI.getUser(profileId!)
   )
 
-  const { data: timeline, ...timelineInfo } = useQuery<Post[]>(
+  const { data: timeline, ...timelineInfo } = useInfiniteQuery<Post[]>(
     ['timeline', profileId],
-    () =>
+    ({ pageParam = 1 }) =>
       postsAPI.getTimeline({
         userId: profileId!,
-        offset: 0,
-        limit: 10,
-      })
+        page: pageParam,
+      }),
+    {
+      getNextPageParam: (lastPage, allPages) => {
+        if (lastPage.length === 0) return undefined
+        const nextPage = allPages.length + 1
+        return nextPage
+      },
+    }
   )
 
   return {
     profileUser: profileUser || defaultUser,
     profileUserInfo,
-    timeline: timeline || [],
+    timeline: timeline?.pages.flat() || [],
     timelineInfo,
   }
 }
