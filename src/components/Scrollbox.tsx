@@ -18,6 +18,9 @@ function Scrollbox({ children, maxH }: ScrollboxProps) {
         '&::-webkit-scrollbar': {
           w: '2',
         },
+        // '&::-webkit-scrollbar:horizontal': {
+        //   h: '2',
+        // },
         '&::-webkit-scrollbar-track': {
           w: '6',
         },
@@ -30,6 +33,7 @@ function Scrollbox({ children, maxH }: ScrollboxProps) {
         },
       }}
       direction="column"
+      overflowX="hidden"
       overflowY="scroll"
       maxH={maxH}
     >
