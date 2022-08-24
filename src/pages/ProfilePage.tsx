@@ -174,7 +174,7 @@ function ProfilePage() {
             w={{ base: 'none', lg: '490px' }}
             mt={3}
           >
-            {profileUser.friends.map((friend) => (
+            {profileUser.friends.slice(0, 9).map((friend) => (
               <GridItem key={friend.id}>
                 <Link to={`/profile/${friend.id}`}>
                   <Image
