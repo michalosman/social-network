@@ -9,10 +9,12 @@ import { useParams } from 'react-router-dom'
 import postsAPI from '../api/postsAPI'
 import usersAPI from '../api/usersAPI'
 import defaultUser from '../utils/defaultValues'
+import useAuth from './useAuth'
 
 const useUser = () => {
   const queryClient = useQueryClient()
   const { profileId } = useParams()
+  const { user: currentUser } = useAuth()
 
   const { data: user, ...userInfo } = useQuery<User>(
     'user',
@@ -20,7 +22,7 @@ const useUser = () => {
   )
 
   const { data: feed, ...feedInfo } = useInfiniteQuery<Post[]>(
-    'feed',
+    ['feed', currentUser],
     ({ pageParam = 1 }) => postsAPI.getFeed(pageParam),
     {
       getNextPageParam: (lastPage, allPages) => {
