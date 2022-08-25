@@ -1,8 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios'
 
-const CLOUDINARY_URL = import.meta.env.VITE_CLOUDINARY_URL
-const CLOUDINARY_UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
+import { CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_URL } from '../utils/constants'
 
 const uploadImage = async (image: File) => {
   const formData = new FormData()

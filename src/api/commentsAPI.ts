@@ -1,10 +1,11 @@
 import axios from 'axios'
 
-const SERVER_URL =
-  `${import.meta.env.VITE_SERVER_URL}/api/comments` ||
-  'http://localhost:5000/api/comments'
+import { API_URL } from '../utils/constants'
 
-const api = axios.create({ baseURL: SERVER_URL, withCredentials: true })
+const api = axios.create({
+  baseURL: `${API_URL}/api/comments`,
+  withCredentials: true,
+})
 
 const createComment = async (
   createCommentData: CreateCommentValues

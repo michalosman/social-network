@@ -1,10 +1,11 @@
 import axios from 'axios'
 
-const SERVER_URL =
-  `${import.meta.env.VITE_SERVER_URL}/api/users` ||
-  'http://localhost:5000/api/users'
+import { API_URL } from '../utils/constants'
 
-const api = axios.create({ baseURL: SERVER_URL, withCredentials: true })
+const api = axios.create({
+  baseURL: `${API_URL}/api/users`,
+  withCredentials: true,
+})
 
 const register = async (registerData: RegisterValues): Promise<User> => {
   const { data } = await api.post('/register', registerData)

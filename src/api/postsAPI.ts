@@ -1,10 +1,11 @@
 import axios from 'axios'
 
-const SERVER_URL =
-  `${import.meta.env.VITE_SERVER_URL}/api/posts` ||
-  'http://localhost:5000/api/posts'
+import { API_URL } from '../utils/constants'
 
-const api = axios.create({ baseURL: SERVER_URL, withCredentials: true })
+const api = axios.create({
+  baseURL: `${API_URL}/api/posts`,
+  withCredentials: true,
+})
 
 const createPost = async (createPostData: CreatePostValues): Promise<Post> => {
   const { data } = await api.post('/', createPostData)
