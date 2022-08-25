@@ -29,7 +29,7 @@ function AuthPage() {
             mb={{ base: '12px', lg: 0 }}
             color="messenger.500"
             fontFamily="-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif"
-            fontSize={{ base: '48px', lg: '60px' }}
+            fontSize={{ base: '52px', lg: '60px' }}
             fontWeight="bold"
             letterSpacing="-3px"
           >

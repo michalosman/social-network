@@ -19,8 +19,8 @@ function LoginForm() {
     },
     validationSchema: Yup.object({
       email: Yup.string()
-        .required('Email is required')
-        .matches(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Email is invalid'),
+        .email('Email is invalid')
+        .required('Email is required'),
       password: Yup.string().required('Password is required'),
     }),
     onSubmit: (values) => login(values),
@@ -32,7 +32,7 @@ function LoginForm() {
         mb={3}
         isInvalid={
           (formik.errors.email && formik.touched.email) ||
-          (error && error.code === 404) ||
+          (error && (error.code === 404 || error.code === 400)) ||
           undefined
         }
       >
@@ -51,7 +51,9 @@ function LoginForm() {
         />
         <FormErrorMessage>
           {formik.errors.email ||
-            (error && error.code === 404 && error.message)}
+            (error &&
+              (error.code === 404 || error.code === 400) &&
+              error.message)}
         </FormErrorMessage>
       </FormControl>
       <FormControl

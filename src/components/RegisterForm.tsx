@@ -29,8 +29,8 @@ function RegisterForm() {
         .required('Last name is required')
         .max(30, 'Must be 30 characters or less'),
       email: Yup.string()
-        .required('Email is required')
-        .matches(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Email is invalid'),
+        .email('Email is invalid')
+        .required('Email is required'),
       password: Yup.string()
         .required('Password is required')
         .min(6, 'Must be between 6 and 30 characters')
@@ -81,7 +81,7 @@ function RegisterForm() {
         mb={3}
         isInvalid={
           (formik.errors.email && formik.touched.email) ||
-          (error && error.code === 409) ||
+          (error && (error.code === 409 || error.code === 400)) ||
           undefined
         }
       >
@@ -100,7 +100,9 @@ function RegisterForm() {
         />
         <FormErrorMessage>
           {formik.errors.email ||
-            (error && error.code === 409 && error.message)}
+            (error &&
+              (error.code === 409 || error.code === 400) &&
+              error.message)}
         </FormErrorMessage>
       </FormControl>
       <FormControl
