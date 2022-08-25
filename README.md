@@ -4,7 +4,7 @@ This is a frontend part of a Facebook Clone which I made as a [final project](ht
 
 [API repository](https://github.com/michalosman/facebook-clone-api)
 
-[Live Demo](todo) :point_left:
+[Live Demo](https://facebook-clone-michalosman.netlify.app/) :point_left:
 
 ## Features
 
