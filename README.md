@@ -2,6 +2,8 @@
 
 This is a frontend part of a Facebook Clone which I made as a [final project](https://www.theodinproject.com/lessons/nodejs-odin-book) submission for [The Odin Project](https://www.theodinproject.com/).
 
+[API repository](https://github.com/michalosman/facebook-clone-api)
+
 [Live Demo](todo) :point_left:
 
 ## Features
