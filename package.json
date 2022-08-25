@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "proxy": "https://facebook-clone-michalosman.herokuapp.com",
   "scripts": {
     "dev": "vite --port 3000",
     "build": "tsc && vite build",
