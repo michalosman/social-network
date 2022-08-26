@@ -60,6 +60,7 @@ cd facebook-clone
 VITE_SERVER_URL=<Address of the server, e.g. http://localhost:5000/>
 VITE_CLOUDINARY_URL=<Cloudinary API base URL, e.g. https://api.cloudinary.com/v1_1/{cloud_name}/image/upload>
 VITE_CLOUDINARY_UPLOAD_PRESET=<Cloudinary upload preset>
+VITE_TEST_USER_ID=<Test user ID (optional)>
 ```
 
 ### Install packages and start client
