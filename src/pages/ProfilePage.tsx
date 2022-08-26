@@ -18,6 +18,7 @@ import {
 import { useInView } from 'react-intersection-observer'
 import { Link } from 'react-router-dom'
 
+import defaultAvatar from '../assets/default_avatar.png'
 import Avatar from '../components/Avatar'
 import EditProfile from '../components/EditProfile'
 import Loading from '../components/Loading'
@@ -196,7 +197,7 @@ function ProfilePage() {
                   <Image
                     borderRadius="lg"
                     _hover={{ cursor: 'pointer', filter: 'brightness(0.9)' }}
-                    fallbackSrc="https://i.pravatar.cc/"
+                    fallbackSrc={defaultAvatar}
                     src={friend.image}
                   />
                 </Link>
