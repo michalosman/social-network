@@ -6,3 +6,5 @@ export const API_URL = NODE_ENV === 'production' ? '' : SERVER_URL
 export const CLOUDINARY_URL = import.meta.env.VITE_CLOUDINARY_URL
 export const CLOUDINARY_UPLOAD_PRESET = import.meta.env
   .VITE_CLOUDINARY_UPLOAD_PRESET
+
+export const TEST_USER_ID = import.meta.env.VITE_TEST_USER_ID

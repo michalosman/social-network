@@ -12,6 +12,7 @@ import {
   ModalHeader,
   ModalOverlay,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import { useState } from 'react'
@@ -20,6 +21,7 @@ import * as Yup from 'yup'
 
 import cloudinaryAPI from '../api/cloudinaryAPI'
 import useUser from '../hooks/useUser'
+import { TEST_USER_ID } from '../utils/constants'
 
 interface EditProfileFormValues {
   firstName: string
@@ -33,6 +35,7 @@ function EditProfile() {
   const { user, updateUser } = useUser()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [imageUploading, setImageUploading] = useState<boolean>(false)
+  const toast = useToast()
 
   const formik = useFormik<EditProfileFormValues>({
     initialValues: {
@@ -91,7 +94,18 @@ function EditProfile() {
     <div>
       <Button
         leftIcon={<MdModeEditOutline fontSize="20px" />}
-        onClick={onOpen}
+        onClick={
+          user.id === TEST_USER_ID
+            ? () =>
+                toast({
+                  title: 'Action denied.',
+                  description: 'Cannot edit test user profile.',
+                  status: 'error',
+                  duration: 6000,
+                  isClosable: true,
+                })
+            : onOpen
+        }
         variant="gray"
       >
         Edit profile

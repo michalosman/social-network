@@ -6,6 +6,7 @@ import {
   GridItem,
   Image,
   Text,
+  useToast,
 } from '@chakra-ui/react'
 import { useEffect } from 'react'
 import {
@@ -25,6 +26,7 @@ import useFriendship from '../hooks/useFriendship'
 import useProfile from '../hooks/useProfile'
 import useUser from '../hooks/useUser'
 import checkFriendship from '../utils/checkFriendship'
+import { TEST_USER_ID } from '../utils/constants'
 import ErrorPage from './ErrorPage'
 import LoadingPage from './LoadingPage'
 
@@ -34,6 +36,7 @@ function ProfilePage() {
     useFriendship()
   const { profileUser, profileUserInfo, timeline, timelineInfo } = useProfile()
   const { ref, inView } = useInView()
+  const toast = useToast()
 
   useEffect(() => {
     if (inView) {
@@ -101,7 +104,20 @@ function ProfilePage() {
                   {checkFriendship(user, profileUser) === 'FRIENDS' && (
                     <Button
                       leftIcon={<FaUserMinus />}
-                      onClick={() => removeFriend(profileUser.id)}
+                      onClick={
+                        user.id === TEST_USER_ID &&
+                        profileUser.firstName === 'Test'
+                          ? () =>
+                              toast({
+                                title: 'Action denied.',
+                                description:
+                                  'Test user cannot unfriend other test users.',
+                                status: 'error',
+                                duration: 6000,
+                                isClosable: true,
+                              })
+                          : () => removeFriend(profileUser.id)
+                      }
                       variant="gray"
                     >
                       Unfriend
@@ -181,7 +197,7 @@ function ProfilePage() {
                     borderRadius="lg"
                     _hover={{ cursor: 'pointer', filter: 'brightness(0.9)' }}
                     fallbackSrc="https://i.pravatar.cc/"
-                    src=""
+                    src={friend.image}
                   />
                 </Link>
                 <Link to={`/profile/${friend.id}`}>
@@ -190,7 +206,7 @@ function ProfilePage() {
                     fontSize="13px"
                     fontWeight="semibold"
                     _hover={{ textDecoration: 'underline' }}
-                  >{`${profileUser.firstName} ${profileUser.lastName}`}</Text>
+                  >{`${friend.firstName} ${friend.lastName}`}</Text>
                 </Link>
               </GridItem>
             ))}

@@ -3,9 +3,11 @@ import { useState } from 'react'
 
 import LoginForm from '../components/LoginForm'
 import RegisterForm from '../components/RegisterForm'
+import useAuth from '../hooks/useAuth'
 
 function AuthPage() {
   const [isLogin, setIsLogin] = useState(true)
+  const { login } = useAuth()
 
   return (
     <Container
@@ -74,6 +76,18 @@ function AuthPage() {
               size="lg"
             >
               {isLogin ? 'Create new account' : 'Log in with your account'}
+            </Button>
+          </Flex>
+          <Flex justify="center">
+            <Button
+              mb={3}
+              colorScheme="messenger"
+              onClick={() =>
+                login({ email: 'test@gmail.com', password: 'test123' })
+              }
+              size="lg"
+            >
+              Log in with test user
             </Button>
           </Flex>
         </Flex>
