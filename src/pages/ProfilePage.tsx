@@ -132,14 +132,14 @@ function ProfilePage() {
                         leftIcon={<FaUserPlus />}
                         onClick={() => acceptFriend(profileUser.id)}
                       >
-                        Accept invitation
+                        Accept
                       </Button>
                       <Button
                         colorScheme="red"
                         leftIcon={<FaUserMinus />}
                         onClick={() => rejectFriend(profileUser.id)}
                       >
-                        Reject invitation
+                        Reject
                       </Button>
                     </>
                   )}
