@@ -99,7 +99,7 @@ function PostForm() {
             <Button
               w="50%"
               colorScheme="whatsapp"
-              disabled={imageUploading}
+              isLoading={imageUploading}
               onClick={() => formik.handleSubmit()}
             >
               Add post

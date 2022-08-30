@@ -9,7 +9,7 @@ const usePost = () => {
     onSuccess: () => queryClient.invalidateQueries('feed'),
   })
 
-  const { mutate: likePost } = useMutation(
+  const { mutate: likePost, ...likePostInfo } = useMutation(
     (postId: string) => postsAPI.likePost(postId),
     {
       onSuccess: () => {
@@ -19,7 +19,7 @@ const usePost = () => {
     }
   )
 
-  const { mutate: unlikePost } = useMutation(
+  const { mutate: unlikePost, ...unlikePostInfo } = useMutation(
     (postId: string) => postsAPI.unlikePost(postId),
     {
       onSuccess: () => {
@@ -32,7 +32,9 @@ const usePost = () => {
   return {
     createPost,
     likePost,
+    likePostInfo,
     unlikePost,
+    unlikePostInfo,
   }
 }
 

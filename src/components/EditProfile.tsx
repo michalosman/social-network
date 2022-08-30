@@ -1,5 +1,6 @@
 import {
   Button,
+  Flex,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -127,14 +128,19 @@ function EditProfile() {
             <ModalBody pb={6}>
               <FormControl>
                 <FormLabel>Profile Picture</FormLabel>
-                <Input
-                  p={1}
-                  accept="image/*"
-                  id="image"
-                  name="image"
-                  onChange={(e) => uploadImage(e.target.files)}
-                  type="file"
-                />
+                <Flex>
+                  <Input
+                    p={1}
+                    accept="image/*"
+                    id="image"
+                    name="image"
+                    onChange={(e) => uploadImage(e.target.files)}
+                    type="file"
+                  />
+                  <Button ml={2} onClick={() => updateUser({ image: '' })}>
+                    Reset
+                  </Button>
+                </Flex>
               </FormControl>
               <FormControl
                 mt={4}
@@ -216,7 +222,7 @@ function EditProfile() {
               <Button
                 mr={3}
                 colorScheme="messenger"
-                disabled={imageUploading}
+                isLoading={imageUploading}
                 type="submit"
               >
                 Save
