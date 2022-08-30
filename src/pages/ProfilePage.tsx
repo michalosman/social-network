@@ -195,8 +195,12 @@ function ProfilePage() {
               <GridItem key={friend.id}>
                 <Link to={`/profile/${friend.id}`}>
                   <Image
+                    w="100%"
                     borderRadius="lg"
-                    _hover={{ cursor: 'pointer', filter: 'brightness(0.9)' }}
+                    _hover={{
+                      cursor: 'pointer',
+                      filter: 'brightness(0.9)',
+                    }}
                     fallbackSrc={defaultAvatar}
                     src={friend.image}
                   />

@@ -31,7 +31,7 @@ function CommentForm({ postId }: CommentFormProps) {
   return (
     <Flex gap={2} mb={3}>
       <Link to={`/profile/${user.id}`}>
-        <Avatar size="32px" src="" hover />
+        <Avatar size="32px" src={user.image} hover />
       </Link>
       <form onSubmit={formik.handleSubmit} style={{ flex: 1 }}>
         <Input

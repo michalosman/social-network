@@ -1,6 +1,7 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 
+import useUser from '../hooks/useUser'
 import Avatar from './Avatar'
 
 interface CommentItemProps {
@@ -8,10 +9,12 @@ interface CommentItemProps {
 }
 
 function CommentItem({ comment }: CommentItemProps) {
+  const { user } = useUser()
+
   return (
     <Flex key={comment.id}>
       <Link to={`/profile/${comment.author.id}`}>
-        <Avatar size="32px" src="" hover />
+        <Avatar size="32px" src={user.image} hover />
       </Link>
       <Box ml={2} pt={1} pb={2} px={2.5} bg="gray.100" borderRadius="2xl">
         <Link to={`/profile/${comment.author.id}`}>
