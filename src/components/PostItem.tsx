@@ -11,7 +11,6 @@ import moment from 'moment'
 import { FaRegCommentAlt, FaRegThumbsUp, FaThumbsUp } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
-import useComment from '../hooks/useComment'
 import usePost from '../hooks/usePost'
 import useUser from '../hooks/useUser'
 import Avatar from './Avatar'
@@ -24,8 +23,7 @@ interface PostItemProps {
 
 function PostItem({ post }: PostItemProps) {
   const { user } = useUser()
-  const { likePost, likePostInfo, unlikePost, unlikePostInfo } = usePost()
-  const { comments } = useComment(post.id)
+  const { likePost, unlikePost } = usePost()
   const { isOpen: commentsOpen, onToggle: toggleCommentsOpen } = useDisclosure()
 
   const isAlreadyLiked = () => {
@@ -73,7 +71,7 @@ function PostItem({ post }: PostItemProps) {
           _hover={{ textDecoration: 'underline', cursor: 'pointer' }}
           onClick={toggleCommentsOpen}
         >
-          {comments.length} Comments
+          {post.comments.length} Comments
         </Text>
       </Flex>
       <Box px={4}>
@@ -81,7 +79,6 @@ function PostItem({ post }: PostItemProps) {
         <Button
           w="50%"
           color={isAlreadyLiked() ? 'messenger.500' : 'gray.600'}
-          isLoading={likePostInfo.isLoading || unlikePostInfo.isLoading}
           leftIcon={isAlreadyLiked() ? <FaThumbsUp /> : <FaRegThumbsUp />}
           onClick={
             isAlreadyLiked()
