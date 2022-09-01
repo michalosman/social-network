@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from 'react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import commentsAPI from '../api/commentsAPI'
 
@@ -11,7 +11,7 @@ const useComment = (postId: string) => {
   )
 
   const { mutate: createComment } = useMutation(commentsAPI.createComment, {
-    onSuccess: () => queryClient.invalidateQueries(`comments${postId}`),
+    onSuccess: () => queryClient.invalidateQueries([`comments${postId}`]),
   })
 
   return {

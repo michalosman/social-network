@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 
 import usersAPI from '../api/usersAPI'
@@ -11,9 +11,9 @@ const useFriendship = () => {
     (otherUserId: string) => usersAPI.requestFriend(otherUserId),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries('user')
+        queryClient.invalidateQueries([['user']])
         if (profileId) {
-          queryClient.invalidateQueries('profile')
+          queryClient.invalidateQueries([['profile']])
         }
       },
     }
@@ -23,9 +23,9 @@ const useFriendship = () => {
     (otherUserId: string) => usersAPI.acceptFriend(otherUserId),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries('user')
+        queryClient.invalidateQueries([['user']])
         if (profileId) {
-          queryClient.invalidateQueries('profile')
+          queryClient.invalidateQueries([['profile']])
         }
       },
     }
@@ -35,9 +35,9 @@ const useFriendship = () => {
     (otherUserId: string) => usersAPI.rejectFriend(otherUserId),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries('user')
+        queryClient.invalidateQueries(['user'])
         if (profileId) {
-          queryClient.invalidateQueries('profile')
+          queryClient.invalidateQueries(['profile'])
         }
       },
     }
@@ -47,9 +47,9 @@ const useFriendship = () => {
     (otherUserId: string) => usersAPI.removeFriend(otherUserId),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries('user')
+        queryClient.invalidateQueries(['user'])
         if (profileId) {
-          queryClient.invalidateQueries('profile')
+          queryClient.invalidateQueries(['profile'])
         }
       },
     }

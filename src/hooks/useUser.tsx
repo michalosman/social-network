@@ -3,7 +3,7 @@ import {
   useMutation,
   useQuery,
   useQueryClient,
-} from 'react-query'
+} from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 
 import postsAPI from '../api/postsAPI'
@@ -17,7 +17,7 @@ const useUser = () => {
   const { user: currentUser } = useAuth()
 
   const { data: user, ...userInfo } = useQuery<User>(
-    'user',
+    ['user'],
     usersAPI.getCurrentUser
   )
 
@@ -35,9 +35,9 @@ const useUser = () => {
 
   const { mutate: updateUser } = useMutation(usersAPI.updateUser, {
     onSuccess: () => {
-      queryClient.invalidateQueries('profile')
+      queryClient.invalidateQueries(['profile'])
       if (profileId && user && profileId === user.id) {
-        queryClient.invalidateQueries('user')
+        queryClient.invalidateQueries(['user'])
       }
     },
   })

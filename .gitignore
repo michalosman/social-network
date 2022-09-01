@@ -1,4 +1,5 @@
 .env
+coverage
 
 # Logs
 logs
