@@ -1,4 +1,4 @@
-enum FriendshipStatus {
+export enum FriendshipStatus {
   FRIENDS = 'FRIENDS',
   NOT_FRIENDS = 'NOT_FRIENDS',
   REQUEST_SENT = 'REQUEST_SENT',
