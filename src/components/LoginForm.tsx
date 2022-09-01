@@ -10,7 +10,7 @@ interface LoginFormValues {
 }
 
 function LoginForm() {
-  const { login, error, setError } = useAuth()
+  const { login, error } = useAuth()
 
   const formik = useFormik<LoginFormValues>({
     initialValues: {
@@ -19,7 +19,10 @@ function LoginForm() {
     },
     validationSchema: Yup.object({
       email: Yup.string()
-        .email('Email is invalid')
+        .matches(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+          'Email is invalid'
+        )
         .required('Email is required'),
       password: Yup.string().required('Password is required'),
     }),
@@ -42,14 +45,14 @@ function LoginForm() {
           onBlur={formik.handleBlur}
           onChange={(e) => {
             formik.handleChange(e)
-            setError(null)
+            if (error) error.code = 0
           }}
           placeholder="Email or phone number"
           size="lg"
           type="text"
           value={formik.values.email}
         />
-        <FormErrorMessage>
+        <FormErrorMessage data-testid="emailError">
           {formik.errors.email ||
             (error &&
               (error.code === 404 || error.code === 400) &&
@@ -70,14 +73,14 @@ function LoginForm() {
           onBlur={formik.handleBlur}
           onChange={(e) => {
             formik.handleChange(e)
-            setError(null)
+            if (error) error.code = 0
           }}
           placeholder="Password"
           size="lg"
           type="password"
           value={formik.values.password}
         />
-        <FormErrorMessage>
+        <FormErrorMessage data-testid="passwordError">
           {formik.errors.password ||
             (error && error.code === 401 && error.message)}
         </FormErrorMessage>

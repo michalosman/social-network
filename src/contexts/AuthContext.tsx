@@ -8,7 +8,6 @@ interface AuthContextType {
   error: any
   isLoading: boolean
   initialLoading: boolean
-  setError: React.Dispatch<any>
   register: (registerData: RegisterValues) => void
   login: (loginData: LoginValues) => void
   logout: () => void
@@ -27,6 +26,8 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const autoLogin = async () => {
+    setError(null)
+
     try {
       const user = await usersAPI.getCurrentUser()
       setUser(user)
@@ -85,7 +86,6 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
       error,
       isLoading,
       initialLoading,
-      setError,
       register,
       login,
       logout,

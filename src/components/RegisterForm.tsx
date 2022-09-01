@@ -12,7 +12,7 @@ interface RegisterFormValues {
 }
 
 function RegisterForm() {
-  const { register, error, setError } = useAuth()
+  const { register, error } = useAuth()
 
   const formik = useFormik<RegisterFormValues>({
     initialValues: {
@@ -29,7 +29,10 @@ function RegisterForm() {
         .required('Last name is required')
         .max(30, 'Must be 30 characters or less'),
       email: Yup.string()
-        .email('Email is invalid')
+        .matches(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+          'Email is invalid'
+        )
         .required('Email is required'),
       password: Yup.string()
         .required('Password is required')
@@ -57,7 +60,9 @@ function RegisterForm() {
           type="text"
           value={formik.values.firstName}
         />
-        <FormErrorMessage>{formik.errors.firstName}</FormErrorMessage>
+        <FormErrorMessage data-testid="firstNameError">
+          {formik.errors.firstName}
+        </FormErrorMessage>
       </FormControl>
       <FormControl
         mb={3}
@@ -75,7 +80,9 @@ function RegisterForm() {
           type="text"
           value={formik.values.lastName}
         />
-        <FormErrorMessage>{formik.errors.lastName}</FormErrorMessage>
+        <FormErrorMessage data-testid="lastNameError">
+          {formik.errors.lastName}
+        </FormErrorMessage>
       </FormControl>
       <FormControl
         mb={3}
@@ -91,14 +98,14 @@ function RegisterForm() {
           onBlur={formik.handleBlur}
           onChange={(e) => {
             formik.handleChange(e)
-            setError(null)
+            if (error) error.code = 0
           }}
           placeholder="Email or phone number"
           size="lg"
           type="text"
           value={formik.values.email}
         />
-        <FormErrorMessage>
+        <FormErrorMessage data-testid="emailError">
           {formik.errors.email ||
             (error &&
               (error.code === 409 || error.code === 400) &&
@@ -121,7 +128,9 @@ function RegisterForm() {
           type="password"
           value={formik.values.password}
         />
-        <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
+        <FormErrorMessage data-testid="passwordError">
+          {formik.errors.password}
+        </FormErrorMessage>
       </FormControl>
       <Button
         w="100%"
