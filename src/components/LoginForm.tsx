@@ -86,9 +86,9 @@ function LoginForm() {
         w="100%"
         fontSize="20px"
         fontWeight="bold"
-        colorScheme="messenger"
         size="lg"
         type="submit"
+        variant="primary"
       >
         Log In
       </Button>

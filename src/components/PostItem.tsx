@@ -78,7 +78,7 @@ function PostItem({ post }: PostItemProps) {
         <Divider mb={1} />
         <Button
           w="50%"
-          color={isAlreadyLiked() ? 'messenger.500' : 'gray.600'}
+          color={isAlreadyLiked() ? 'yellow.500' : 'gray.600'}
           leftIcon={isAlreadyLiked() ? <FaThumbsUp /> : <FaRegThumbsUp />}
           onClick={
             isAlreadyLiked()
@@ -87,9 +87,7 @@ function PostItem({ post }: PostItemProps) {
           }
           variant="ghost"
         >
-          <Text color={isAlreadyLiked() ? 'messenger.500' : 'default'}>
-            Like
-          </Text>
+          <Text color={isAlreadyLiked() ? 'yellow.500' : 'default'}>Like</Text>
         </Button>
         <Button
           w="50%"

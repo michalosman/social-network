@@ -6,7 +6,7 @@ function LoadingPage() {
       <Spinner
         w="100px"
         h="100px"
-        color="messenger.500"
+        color="yellow.500"
         emptyColor="gray.200"
         speed="0.7s"
         thickness="4px"

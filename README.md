@@ -1,10 +1,10 @@
-# Facebook Clone
+# Odinbook
 
-This is a frontend part of a Facebook Clone which I made as a [final project](https://www.theodinproject.com/lessons/nodejs-odin-book) submission for [The Odin Project](https://www.theodinproject.com/).
+This is a frontend part of an Odinbook which I made as a [final project](https://www.theodinproject.com/lessons/nodejs-odin-book) submission for [The Odin Project](https://www.theodinproject.com/).
 
-[API repository](https://github.com/michalosman/facebook-clone-api)
+[API repository](https://github.com/michalosman/odinbook-api)
 
-[Live Demo](https://facebook-clone-michalosman.netlify.app/) :point_left:
+[Live Demo](https://odinbook-mo.netlify.app/) :point_left:
 
 ## Features
 
@@ -50,8 +50,8 @@ This is a frontend part of a Facebook Clone which I made as a [final project](ht
 ### Clone repository
 
 ```
-git clone https://github.com/michalosman/facebook-clone.git
-cd facebook-clone
+git clone https://github.com/michalosman/odinbook.git
+cd odinbook
 ```
 
 ### Set up environment variables

@@ -1,4 +1,4 @@
-import { Button, Container, Divider, Flex, Link, Text } from '@chakra-ui/react'
+import { Button, Container, Divider, Flex, Text } from '@chakra-ui/react'
 import { useState } from 'react'
 
 import LoginForm from '../components/LoginForm'
@@ -29,13 +29,13 @@ function AuthPage() {
             align={{ base: 'center', lg: 'left' }}
             mt={{ base: '30px', lg: '8px' }}
             mb={{ base: '12px', lg: 0 }}
-            color="messenger.500"
+            color="yellow.500"
             fontFamily="-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif"
             fontSize={{ base: '52px', lg: '60px' }}
             fontWeight="bold"
             letterSpacing="-3px"
           >
-            facebook clone
+            odinbook
           </Text>
           <Text
             align={{ base: 'center', lg: 'left' }}
@@ -43,7 +43,7 @@ function AuthPage() {
             fontSize={{ base: '24px', lg: '28px' }}
             lineHeight="1.14"
           >
-            Connect with friends and the world around you on Facebook.
+            Connect with friends and the world around you on Odinbook.
           </Text>
         </Flex>
         <Flex
@@ -59,14 +59,6 @@ function AuthPage() {
           shadow="xl"
         >
           {isLogin ? <LoginForm /> : <RegisterForm />}
-          <Link
-            color="messenger.500"
-            fontSize="14px"
-            textAlign="center"
-            href="/"
-          >
-            Forgot password?
-          </Link>
           <Divider mt={2} mb={4} />
           <Flex justify="center">
             <Button
@@ -81,11 +73,11 @@ function AuthPage() {
           <Flex justify="center">
             <Button
               mb={3}
-              colorScheme="messenger"
               onClick={() =>
                 login({ email: 'test@gmail.com', password: 'test123' })
               }
               size="lg"
+              variant="secondary"
             >
               Log in with test user
             </Button>
