@@ -1,9 +1,9 @@
 {
-  "name": "odinbook",
+  "name": "facebook-clone",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "proxy": "https://odinbook-mo.herokuapp.com",
+  "proxy": "https://facebook-clone-michalosman.herokuapp.com",
   "scripts": {
     "dev": "vite --port 3000",
     "build": "tsc && vite build",

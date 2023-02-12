@@ -34,28 +34,6 @@ const theme = extendTheme({
             backgroundColor: 'gray.400',
           },
         }),
-        primary: (props: any) => ({
-          ...defaultTheme.components.Button.variants.solid(props),
-          color: 'white',
-          backgroundColor: 'yellow.500',
-          _hover: {
-            backgroundColor: 'yellow.600',
-          },
-          _active: {
-            transform: 'scale(0.98)',
-          },
-        }),
-        secondary: (props: any) => ({
-          ...defaultTheme.components.Button.variants.solid(props),
-          color: 'white',
-          backgroundColor: '#0F7676',
-          _hover: {
-            backgroundColor: '#0E6565',
-          },
-          _active: {
-            transform: 'scale(0.98)',
-          },
-        }),
       },
     },
   },

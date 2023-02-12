@@ -127,9 +127,9 @@ function RegisterForm() {
         w="100%"
         fontSize="20px"
         fontWeight="bold"
+        colorScheme="messenger"
         size="lg"
         type="submit"
-        variant="primary"
       >
         Sign Up
       </Button>

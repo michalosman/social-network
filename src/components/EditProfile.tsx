@@ -221,9 +221,9 @@ function EditProfile() {
             <ModalFooter>
               <Button
                 mr={3}
+                colorScheme="messenger"
                 isLoading={imageUploading}
                 type="submit"
-                variant="primary"
               >
                 Save
               </Button>

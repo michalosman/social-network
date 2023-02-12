@@ -10,7 +10,7 @@ function ErrorPage() {
         The link may be broken, or the page may have been removed. Check to see
         if the link you`re trying to open is correct.
       </Text>
-      <Button size="lg" variant="primary">
+      <Button colorScheme="messenger" size="lg">
         <a href="/">Go to Home Page</a>
       </Button>
     </Flex>

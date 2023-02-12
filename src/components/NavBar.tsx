@@ -1,6 +1,5 @@
 import { Box, Flex, Image } from '@chakra-ui/react'
 
-import logo from '../assets/logo.png'
 import NavMenu from './NavMenu'
 import NavSearch from './NavSearch'
 
@@ -24,8 +23,12 @@ function NavBar() {
         py={2}
       >
         <Flex gap={2}>
-          <a href="/">
-            <Image w="40px" alt="Odinbook logo" src={logo} />
+          <a href="/" title="Facebook, Public domain, via Wikimedia Commons">
+            <Image
+              w="40px"
+              alt="Facebook logo"
+              src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg"
+            />
           </a>
           <NavSearch />
         </Flex>

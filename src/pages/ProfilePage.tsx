@@ -95,9 +95,9 @@ function ProfilePage() {
                 <>
                   {checkFriendship(user, profileUser) === 'NOT_FRIENDS' && (
                     <Button
+                      colorScheme="messenger"
                       leftIcon={<FaUserPlus />}
                       onClick={() => requestFriend(profileUser.id)}
-                      variant="primary"
                     >
                       Add friend
                     </Button>
@@ -144,7 +144,11 @@ function ProfilePage() {
                     </>
                   )}
                   {checkFriendship(user, profileUser) === 'REQUEST_SENT' && (
-                    <Button disabled leftIcon={<FaCheck />} variant="primary">
+                    <Button
+                      colorScheme="messenger"
+                      disabled
+                      leftIcon={<FaCheck />}
+                    >
                       Invitation sent
                     </Button>
                   )}

@@ -31,7 +31,7 @@ function NavSearch() {
           maxW="240px"
           onBlur={() => setTimeout(() => setSearchPhrase(''), 100)}
           onChange={(e) => setSearchPhrase(e.target.value)}
-          placeholder="Search Odinbook"
+          placeholder="Search Facebook"
           type="text"
           value={searchPhrase}
           variant="round"

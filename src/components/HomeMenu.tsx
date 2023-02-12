@@ -23,31 +23,31 @@ function HomeMenu() {
         </Button>
       </Link>
       <Button size="lg" variant="left">
-        <Icon as={FaUserFriends} color="yellow.500" fontSize="36px" />
+        <Icon as={FaUserFriends} color="messenger.500" fontSize="36px" />
         <Text ml={2} fontSize="15px">
           Friends
         </Text>
       </Button>
       <Button size="lg" variant="left">
-        <Icon as={MdGroups} color="yellow.500" fontSize="36px" />
+        <Icon as={MdGroups} color="messenger.500" fontSize="36px" />
         <Text ml={2} fontSize="15px">
           Groups
         </Text>
       </Button>
       <Button size="lg" variant="left">
-        <Icon as={AiFillShop} color="yellow.500" fontSize="36px" />
+        <Icon as={AiFillShop} color="messenger.500" fontSize="36px" />
         <Text ml={2} fontSize="15px">
           Marketplace
         </Text>
       </Button>
       <Button size="lg" variant="left">
-        <Icon as={BiTimer} color="yellow.500" fontSize="36px" />
+        <Icon as={BiTimer} color="messenger.500" fontSize="36px" />
         <Text ml={2} fontSize="15px">
           Memories
         </Text>
       </Button>
       <Button size="lg" variant="left">
-        <Icon as={MdKeyboardArrowDown} color="yellow.500" fontSize="36px" />
+        <Icon as={MdKeyboardArrowDown} color="messenger.500" fontSize="36px" />
         <Text ml={2} fontSize="15px">
           See more
         </Text>
