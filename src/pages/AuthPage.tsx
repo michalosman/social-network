@@ -35,7 +35,7 @@ function AuthPage() {
             fontWeight="bold"
             letterSpacing="-3px"
           >
-            facebook clone
+            social network
           </Text>
           <Text
             align={{ base: 'center', lg: 'left' }}
@@ -43,7 +43,7 @@ function AuthPage() {
             fontSize={{ base: '24px', lg: '28px' }}
             lineHeight="1.14"
           >
-            Connect with friends and the world around you on Facebook.
+            Connect with friends and the world around you on Social Network.
           </Text>
         </Flex>
         <Flex
