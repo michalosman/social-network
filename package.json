@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "proxy": "https://social-network-michalosman.herokuapp.com",
+  "proxy": "https://social-network-api-michalosman.onrender.com",
   "scripts": {
     "dev": "vite --port 3000",
     "build": "tsc && vite build",
