@@ -1,6 +1,11 @@
 import { Flex, Spinner, Text } from '@chakra-ui/react'
 
-function LoadingPage() {
+interface LoadingPageProps {
+  message?: string
+  description?: string
+}
+
+function LoadingPage({ message, description }: LoadingPageProps) {
   return (
     <Flex align="center" justify="center" direction="column" h="100vh">
       <Spinner
@@ -12,11 +17,16 @@ function LoadingPage() {
         thickness="4px"
       />
       <Text mt={4} fontSize="2xl">
-        Waking up the server...{' '}
+        {message}
       </Text>
-      <Text color="gray.500">Be patient, it may take up to 2 minutes</Text>
+      <Text color="gray.500">{description}</Text>
     </Flex>
   )
+}
+
+LoadingPage.defaultProps = {
+  message: '',
+  description: '',
 }
 
 export default LoadingPage

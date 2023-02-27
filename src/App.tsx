@@ -11,7 +11,13 @@ import ProfilePage from './pages/ProfilePage'
 function App() {
   const { user, initialLoading } = useAuth()
 
-  if (initialLoading) return <LoadingPage />
+  if (initialLoading)
+    return (
+      <LoadingPage
+        message="Waking up the server..."
+        description="Be patient, it may take up to 2 minutes"
+      />
+    )
   if (!user) return <AuthPage />
 
   return (
