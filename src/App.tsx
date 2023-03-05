@@ -15,7 +15,7 @@ function App() {
     return (
       <LoadingPage
         message="Waking up the server..."
-        description="Be patient, it may take up to 2 minutes"
+        description="Be patient, it may take up to 5 minutes"
       />
     )
   if (!user) return <AuthPage />
