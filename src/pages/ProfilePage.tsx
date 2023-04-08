@@ -95,7 +95,7 @@ function ProfilePage() {
                 <>
                   {checkFriendship(user, profileUser) === 'NOT_FRIENDS' && (
                     <Button
-                      colorScheme="messenger"
+                      colorScheme="teal"
                       leftIcon={<FaUserPlus />}
                       onClick={() => requestFriend(profileUser.id)}
                     >
@@ -128,7 +128,7 @@ function ProfilePage() {
                     'REQUEST_RECEIVED' && (
                     <>
                       <Button
-                        colorScheme="whatsapp"
+                        colorScheme="orange"
                         leftIcon={<FaUserPlus />}
                         onClick={() => acceptFriend(profileUser.id)}
                       >
@@ -144,11 +144,7 @@ function ProfilePage() {
                     </>
                   )}
                   {checkFriendship(user, profileUser) === 'REQUEST_SENT' && (
-                    <Button
-                      colorScheme="messenger"
-                      disabled
-                      leftIcon={<FaCheck />}
-                    >
+                    <Button colorScheme="teal" disabled leftIcon={<FaCheck />}>
                       Invitation sent
                     </Button>
                   )}

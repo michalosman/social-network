@@ -29,7 +29,7 @@ function AuthPage() {
             align={{ base: 'center', lg: 'left' }}
             mt={{ base: '30px', lg: '8px' }}
             mb={{ base: '12px', lg: 0 }}
-            color="messenger.500"
+            color="teal.500"
             fontFamily="-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif"
             fontSize={{ base: '52px', lg: '60px' }}
             fontWeight="bold"
@@ -59,19 +59,15 @@ function AuthPage() {
           shadow="xl"
         >
           {isLogin ? <LoginForm /> : <RegisterForm />}
-          <Link
-            color="messenger.500"
-            fontSize="14px"
-            textAlign="center"
-            href="/"
-          >
+
+          <Link color="teal.500" fontSize="14px" textAlign="center" href="/">
             Forgot password?
           </Link>
           <Divider mt={2} mb={4} />
           <Flex justify="center">
             <Button
               mb={3}
-              colorScheme="whatsapp"
+              colorScheme="orange"
               onClick={() => setIsLogin(!isLogin)}
               size="lg"
             >
@@ -81,7 +77,7 @@ function AuthPage() {
           <Flex justify="center">
             <Button
               mb={3}
-              colorScheme="messenger"
+              colorScheme="teal"
               onClick={() =>
                 login({ email: 'test@gmail.com', password: 'test123' })
               }

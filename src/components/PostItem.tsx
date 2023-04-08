@@ -58,7 +58,7 @@ function PostItem({ post }: PostItemProps) {
       {post.image && <Image w="100%" mt={2.5} src={post.image} />}
       <Flex align="center" justify="space-between" px={4} py={2.5}>
         <Flex align="center">
-          <Box boxSize="21px" p={1} bg="blue.400" rounded="full">
+          <Box boxSize="21px" p={1} bg="teal.500" rounded="full">
             <FaThumbsUp fontSize="12px" color="white" />
           </Box>
           <Text ml={2} color="gray.500">
@@ -78,7 +78,7 @@ function PostItem({ post }: PostItemProps) {
         <Divider mb={1} />
         <Button
           w="50%"
-          color={isAlreadyLiked() ? 'messenger.500' : 'gray.600'}
+          color={isAlreadyLiked() ? 'teal.500' : 'gray.600'}
           leftIcon={isAlreadyLiked() ? <FaThumbsUp /> : <FaRegThumbsUp />}
           onClick={
             isAlreadyLiked()
@@ -87,9 +87,7 @@ function PostItem({ post }: PostItemProps) {
           }
           variant="ghost"
         >
-          <Text color={isAlreadyLiked() ? 'messenger.500' : 'default'}>
-            Like
-          </Text>
+          <Text color={isAlreadyLiked() ? 'teal.500' : 'default'}>Like</Text>
         </Button>
         <Button
           w="50%"

@@ -98,7 +98,7 @@ function PostForm() {
           <Flex gap={2}>
             <Button
               w="50%"
-              colorScheme="whatsapp"
+              colorScheme="orange"
               isLoading={imageUploading}
               onClick={() => formik.handleSubmit()}
             >
@@ -113,7 +113,7 @@ function PostForm() {
       {!photoInputOpen && (
         <Button
           leftIcon={
-            <Box color="whatsapp.500">
+            <Box color="orange.500">
               <IoMdImages size="20px" />
             </Box>
           }

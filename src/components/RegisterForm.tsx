@@ -127,7 +127,7 @@ function RegisterForm() {
         w="100%"
         fontSize="20px"
         fontWeight="bold"
-        colorScheme="messenger"
+        colorScheme="teal"
         size="lg"
         type="submit"
       >

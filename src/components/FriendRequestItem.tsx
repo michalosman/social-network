@@ -27,7 +27,7 @@ function FriendRequestItem({ friendRequest }: FriendRequestItemProps) {
         <Flex gap={2}>
           <Button
             w="50%"
-            colorScheme="messenger"
+            colorScheme="teal"
             onClick={() => acceptFriend(friendRequest.id)}
             size="sm"
           >
