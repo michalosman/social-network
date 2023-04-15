@@ -37,16 +37,12 @@ function PostForm() {
       text: '',
       image: '',
     },
-    onSubmit: async (values) => {
+    onSubmit: (values) => {
       if ((values.text === '' && values.image === '') || imageUploading) return
       createPost(values)
       closePhotoInput()
-      formik.resetForm({
-        values: {
-          text: '',
-          image: '',
-        },
-      })
+      formik.setFieldValue('text', '')
+      formik.setFieldValue('image', '')
     },
   })
 
@@ -54,8 +50,14 @@ function PostForm() {
     if (!files) return
     setImageUploading(true)
     const imageUrl = await cloudinaryAPI.uploadImage(files[0])
+    formik.setFieldValue('image', imageUrl)
     setImageUploading(false)
-    formik.values.image = imageUrl
+  }
+
+  const closePhotoInputAndResetForm = () => {
+    closePhotoInput()
+    formik.setFieldValue('image', '')
+    setImageUploading(false)
   }
 
   return (
@@ -104,7 +106,7 @@ function PostForm() {
             >
               Add post
             </Button>
-            <Button w="50%" onClick={closePhotoInput}>
+            <Button w="50%" onClick={closePhotoInputAndResetForm}>
               Cancel
             </Button>
           </Flex>
