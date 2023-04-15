@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import React, { createContext, useEffect, useMemo, useState } from 'react'
 
 import usersAPI from '../api/usersAPI'
@@ -21,10 +20,6 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   const [error, setError] = useState<any>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [initialLoading, setInitialLoading] = useState<boolean>(true)
-
-  useEffect(() => {
-    autoLogin()
-  }, [])
 
   const autoLogin = async () => {
     try {
@@ -92,6 +87,10 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     }),
     [user, isLoading, initialLoading, error]
   )
+
+  useEffect(() => {
+    autoLogin()
+  }, [])
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
