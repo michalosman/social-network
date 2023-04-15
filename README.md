@@ -2,9 +2,9 @@
 
 Frontend part of a social network app which I made as a [final project](https://www.theodinproject.com/lessons/nodejs-odin-book) submission for [The Odin Project](https://www.theodinproject.com/).
 
-[API repository](https://github.com/michalosman/social-network-api)
+[Live Demo](https://michalosman-social-network.onrender.com/) :point_left:
 
-[Live Demo](https://social-network-michalosman.onrender.com/) :point_left:
+[API repository](https://github.com/michalosman/social-network-api)
 
 ## Features
 
