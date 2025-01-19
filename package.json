@@ -16,7 +16,7 @@
     "@chakra-ui/theme": "^2.1.5",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
-    "axios": "^0.27.2",
+    "axios": "^1.7.9",
     "formik": "^2.2.9",
     "framer-motion": "^6.5.1",
     "moment": "^2.29.4",
