@@ -19,6 +19,7 @@ import { useInView } from 'react-intersection-observer'
 import { Link } from 'react-router-dom'
 
 import defaultAvatar from '../assets/default_avatar.png'
+import defaultBackground from '../assets/default_background.png'
 import Avatar from '../components/Avatar'
 import EditProfile from '../components/EditProfile'
 import Loading from '../components/Loading'
@@ -58,7 +59,7 @@ function ProfilePage() {
             h={{ base: '250px', lg: '350px', xl: '500px' }}
             m="auto"
             borderRadius="lg"
-            fallbackSrc="https://via.placeholder.com/2000/eee/eee?Text=qwerty"
+            fallbackSrc={defaultBackground}
           />
           <Flex
             justify={{ base: 'flex-start', lg: 'space-between' }}
